@@ -1,3 +1,7 @@
+Jira board https://vdabproject.atlassian.net/jira/software/c/projects/ADDER/boards/3
+
+spring-repo https://github.com/DokterLeusj/spring-mealplanner
+
 # NgWeeklymealPlanner
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.1.
