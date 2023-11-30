@@ -1,0 +1,24 @@
+<div class="warning-text-color">This is a placeholder page to test styles</div>
+
+<div class="container-fluid">
+  fluid container test
+  <div class="container">
+    container test
+    <div class="row">
+      <div class="col-12">
+        <h1> h1 placeholder - Page titles </h1>
+        <h2>h2 placeholder - In page titles </h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid animi aperiam at consequatur eum
+          fugit impedit necessitatibus odit omnis optio perspiciatis, quas repellendus! Animi doloremque explicabo
+          magnam tempore voluptas!
+        </p>
+        <h2> Button style</h2>
+        <div class="btn btn-default">Click me :D</div>
+        <h2> Colors and text</h2>
+        <div class="text-center row">
+          <div  *ngFor="let style of styles" [style]=style.css>{{style.text}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
