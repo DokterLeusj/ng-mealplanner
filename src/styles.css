@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* Colors */
+  --color-white:white;
+  --color-base: #eee2dc;
+  --color-light: #edc7b7;
+  --color-medium-light: #bab285;
+  --color-medium-dark: #9c9467;
+  --color-dark: #123c69;
+  --color-warning:#ac3b61;
+
+  /* other */
+  --placeholder-img-url: url("https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato");
+}
+
+body {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  background-color: var(--color-white);
+}
+
+h1 {   /*Use for page titles only*/
+  font-weight: 100;
+  font-size: xx-large;
+  color:var(--color-light);
+}
+h2{ /*Use for in page titles only*/
+  font-weight: 300;
+}
+
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+.warning-text-color{
+  color:  var(--color-warning);
+  font-weight: 400;
+}
+.btn{
+  --bs-btn-font-size: 1rem;
+  --bs-btn-font-weight: 300;
+  --bs-btn-padding-x: 0.8rem;
+  --bs-btn-padding-y: 0rem;
+  --bs-btn-line-height: 1.5rem;
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-border-color: transparent;
+  border-radius: 1rem;
+}
+.btn-default {
+  --bs-btn-color:var(--color-white);
+  --bs-btn-hover-color:var(--bs-btn-color);
+  --bs-btn-bg: var(--color-medium-dark);
+  --bs-btn-hover-bg: var(--color-medium-light);
+}
+
