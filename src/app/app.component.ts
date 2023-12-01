@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {NavbarComponent} from "./navbar/navbar.component";
-import {FooterComponent} from "./footer/footer.component";
+import {NavbarComponent} from "./ui/navbar/navbar.component";
+import {FooterComponent} from "./ui/footer/footer.component";
 import {StylePageComponent} from "./style-page/style-page.component";
 
 @Component({

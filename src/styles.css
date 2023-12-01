@@ -47,8 +47,8 @@ h2{ /*Use for in page titles only*/
   border-radius: 1rem;
 }
 .btn-default {
-  --bs-btn-color:white;
-  --bs-btn-hover-color:white;
+  --bs-btn-color:var(--color-white);
+  --bs-btn-hover-color:var(--bs-btn-color);
   --bs-btn-bg: var(--color-medium-dark);
   --bs-btn-hover-bg: var(--color-medium-light);
 }
