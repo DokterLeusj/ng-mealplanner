@@ -8,8 +8,6 @@
   --color-dark: #123c69;
   --color-warning:#ac3b61;
 
-  /* other */
-  --placeholder-img-url: url("https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato");
 }
 
 body {
