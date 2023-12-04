@@ -1,0 +1,23 @@
+.navbar{
+  color:var(--color-white);
+  padding-top: 0.1rem;
+  padding-bottom: 0;
+  padding-inline: 0.5rem;
+  background-color: var(--color-dark);
+  margin-bottom: 0.5rem;
+}
+.navbar-brand{
+  color: var(--color-light);
+  padding:inherit;
+}
+.nav-link{
+  padding-block: 0.45rem;
+
+}
+.active {
+  font-weight: 400;
+  border-bottom: 0.1rem solid white;
+}
+#img-profile{
+  height:3rem;
+}
