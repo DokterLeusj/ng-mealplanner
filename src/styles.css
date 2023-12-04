@@ -55,3 +55,11 @@ h2{ /*Use for in page titles only*/
   --bs-btn-hover-bg: var(--color-medium-light);
 }
 
+.img-container-40vh{
+  max-height: 40vh;
+}
+
+.img-inheriting-height{
+  max-height: inherit;
+  max-width: 100%;
+}
