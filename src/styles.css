@@ -20,7 +20,7 @@ body {
 h1 {   /*Use for page titles only*/
   font-weight: 100;
   font-size: xx-large;
-  color:var(--color-light);
+  color:var(--color-medium-dark);
 }
 h2{ /*Use for in page titles only*/
   font-weight: 300;
