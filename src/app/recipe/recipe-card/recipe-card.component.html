@@ -1,35 +1,26 @@
-<!--<div-->
-<!--  *ngFor="let pizza of pizzas"-->
-<!--  class="col-12 col-md-6 col-lg-4 col-xl-3 p-0"-->
-<!--&gt;-->
-<!--  <div class="card-container p-2">-->
-<!--    <div class="card capitalize-text">-->
-<!--      <div class="image-container p-2">-->
-<!--        <img-->
-<!--          [src]="pizza.imgUrl"-->
-<!--          class="card-img-top"-->
-<!--          alt="Image of pizza"-->
-<!--        />-->
-<!--      </div>-->
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 p-0"
+>
+  <div class="card-container p-2">
+    <div class="card capitalize-text">
+      <div class="image-container p-2">
+        <img [ngSrc]="getRecipeImgUrl()" [alt]="'Image of '+recipe.name">
+      </div>
 
-<!--      <div class="card-content d-flex flex-column">-->
-<!--        <div class="card-body">-->
-<!--          <h5 class="card-title">{{ pizza.name }}</h5>-->
-<!--          <p class="card-text">-->
-<!--            {{ pizza.description }}-->
-<!--          </p>-->
-<!--          <div class="pt-3 small">-->
-<!--            Toppings: {{ pizza.toppings }}-->
-<!--            <div class="pt-3 col-12 price">€{{ pizza.price }}</div>-->
-<!--          </div>-->
-<!--          <div class="col-12">-->
-<!--            <button class="btn btn-default" role="button">-->
-<!--              Add to cart-->
-<!--              &lt;!&ndash; TODO: add functionality to button &ndash;&gt;-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+      <div class="card-content d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title">{{ recipe.name }}</h5>
+          <p class="card-text">
+            {{ getRecipeDescription()}}
+          </p>
+          <div class="col-12">
+            <a [routerLink]="'/recipe/'+recipe.author.id">
+            <button class="btn btn-default" role="button">
+              View recipe
+            </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

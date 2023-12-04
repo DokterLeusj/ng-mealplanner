@@ -16,6 +16,10 @@ export class NavbarComponent {
       text: 'Home',
     },
     {
+      routerLink: '/recipes',
+      text: 'Recipes',
+    },
+    {
       routerLink: '/style',
       text: 'DEV style',
     },
