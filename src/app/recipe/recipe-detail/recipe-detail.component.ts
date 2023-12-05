@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RecipeService} from "../../recipe.service";
 
 @Component({
   selector: 'app-recipe-detail',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './recipe-detail.component.css'
 })
 export class RecipeDetailComponent {
+  recipe: any;
+
+  constructor(private recipeService: RecipeService) {
+  }
 
 }

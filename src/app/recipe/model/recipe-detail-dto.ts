@@ -1,4 +1,6 @@
-export interface RecipeListDto {
+import {RecipeIngredientDto} from "./recipe-ingredient-dto";
+
+export interface RecipeDetailDto {
   id:number;
   name:string;
   description:string;
@@ -8,5 +10,5 @@ export interface RecipeListDto {
     id:number;
     username:string;
   }
+  ingredients:RecipeIngredientDto[];
 }
-
