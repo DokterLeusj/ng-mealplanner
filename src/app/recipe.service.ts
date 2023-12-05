@@ -8,11 +8,11 @@ import {RecipeListDto} from "./recipe/model/recipe-list-dto";
 })
 export class RecipeService {
   private readonly BASE_API_URL: string = 'http://localhost:8080/api/v1';
-  private readonly RECIPE_URL: string = this.BASE_API_URL + '/recipe';
+  private readonly RECIPE_URL: string = this.BASE_API_URL + '/recipes';
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllRecipes(): Observable<Array<RecipeListDto>> {
-    return this.httpClient.get<Array<RecipeListDto>>(this.RECIPE_URL);
+  getAllRecipes(): Observable<any> {
+    return this.httpClient.get(this.RECIPE_URL);
   }
 }
