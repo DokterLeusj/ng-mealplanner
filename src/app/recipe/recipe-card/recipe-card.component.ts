@@ -15,15 +15,16 @@ import {RouterLink} from "@angular/router";
   styleUrl: './recipe-card.component.css'
 })
 export class RecipeCardComponent {
-  @Input() recipe: any; // may or may not be necessary to replace RecipeListDto
-  // @Input() recipe: RecipeListDto;
+  // @Input() recipe: any; // may or may not be necessary to replace RecipeListDto
+  @Input()
+  recipe!: RecipeListDto;
   getRecipeDescription():string{
-    return     this.recipe.description==null?
-      "Delicious recipe by "+this.recipe.author.username:
+    return     this.recipe.description==null||this.recipe.description===""?
+      "Delicious recipe by "+this.recipe.author.username+"!":
       this.recipe.description;
   }
   getRecipeImgUrl():string{
-     return  this.recipe.imgUrl==null?
+     return  this.recipe.imgUrl==null||this.recipe.imgUrl===""?
        'https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato':
        this.recipe.imgUrl;
   }
