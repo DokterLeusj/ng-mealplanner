@@ -26,7 +26,11 @@
     </div>
     <div class="card-footer py-1 mt-1">
 <!--      Last updated 3 mins ago  -->
-      by {{recipe.author.username}}
+      by
+<!--      <a [routerLink]="'/users/'+recipe.author.id">-->
+        <a href="#" [title]="'Go to '+recipe.author.username+' profile page.'">
+      {{recipe.author.username}}
+    </a>
     </div>
   </div>
 </div>
