@@ -7,7 +7,7 @@
   margin-bottom: 0.5rem;
 }
 .navbar-brand{
-  color: var(--color-light);
+  color: var(--color-medium-light);
   padding:inherit;
 }
 .nav-link{
@@ -16,7 +16,7 @@
 }
 .active {
   font-weight: 400;
-  border-bottom: 0.1rem solid white;
+  border-bottom: 0.2rem solid var(--color-white);
 }
 #img-profile{
   height:3rem;

@@ -1,12 +1,17 @@
 :root {
   /* Colors */
   --color-white:white;
-  --color-base: #eee2dc;
-  --color-light: #edc7b7;
-  --color-medium-light: #bab285;
-  --color-medium-dark: #9c9467;
-  --color-dark: #123c69;
-  --color-warning:#ac3b61;
+  --color-black:black;
+  --color-base: #eeeadc;
+  --color-light-light: #f8ebb5;
+  --color-light: #f8a663;
+  --color-light-dark: #ff6f22;
+  --color-medium-light: #90cf44;
+  --color-medium-dark: #59B512;
+  /*--color-medium-alt: #8A3E73;*/
+  --color-dark: #311269;
+  --color-muted: rgba(34, 39, 47, 0.82);
+  --color-warning:#FF282A;
 
 }
 
@@ -15,17 +20,19 @@ body {
   font-weight: 300;
   font-size: 0.9rem;
   background-color: var(--color-white);
+  color:var(--color-black);
 }
 
 h1 {   /*Use for page titles only*/
   font-weight: 100;
   font-size: xx-large;
-  color:var(--color-light);
+  color:var(--color-medium-dark);
 }
 h2{ /*Use for in page titles only*/
   font-weight: 300;
 }
-
+h5{/*  Used for card titles*/
+}
 .container-fluid {
   padding: 0;
   margin: 0;

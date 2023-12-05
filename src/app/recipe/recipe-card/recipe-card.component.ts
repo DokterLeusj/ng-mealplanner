@@ -15,8 +15,8 @@ import {RouterLink} from "@angular/router";
   styleUrl: './recipe-card.component.css'
 })
 export class RecipeCardComponent {
-  @Input()
-  public recipe!: RecipeListDto;
+  @Input() recipe: any; // may or may not be necessary to replace RecipeListDto
+  // @Input() recipe: RecipeListDto;
   getRecipeDescription():string{
     return     this.recipe.description==null?
       "Delicious recipe by "+this.recipe.author.username:

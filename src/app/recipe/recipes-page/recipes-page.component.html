@@ -1,8 +1,12 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <h1>Recipes</h1>
-      <app-recipe-card *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-card>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Recipes</h1>
+        <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
+          <app-recipe-card *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>
