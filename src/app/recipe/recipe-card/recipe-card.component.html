@@ -1,26 +1,30 @@
-<div class="col-12 col-md-6 col-lg-4 col-xl-3 p-0"
->
-  <div class="card-container p-2">
-    <div class="card capitalize-text">
-      <div class="image-container p-2">
-        <img [ngSrc]="getRecipeImgUrl()" [alt]="'Image of '+recipe.name">
-      </div>
+<div class="col card-container">
+  <div class="card h-100">
+    <div class="img-container">
+      <a [routerLink]="'/recipes/'+recipe.id">
+      <img class="card-img" [src]="getRecipeImgUrl()" [alt]="'Image of '+recipe.name">
+      </a>
 
-      <div class="card-content d-flex flex-column">
-        <div class="card-body">
-          <h5 class="card-title">{{ recipe.name }}</h5>
-          <p class="card-text">
-            {{ getRecipeDescription()}}
-          </p>
-          <div class="col-12">
-            <a [routerLink]="'/recipes/'+recipe.author.id">
-            <button class="btn btn-default" role="button">
-              View recipe
-            </button>
-            </a>
-          </div>
+    </div>
+    <div class="container pt-2">
+      <h5 class="card-title col-12"> <a [routerLink]="'/recipes/'+recipe.id">
+        {{ recipe.name }}
+      </a></h5>
+    </div>
+    <div class="card-body container d-flex pt-0 pb-1">
+      <div class="row">
+        <div class="card-text col-12 align-self-start">
+          {{ getRecipeDescription()}}
+        </div>
+        <div class="col-12 align-self-end">
+          <a [routerLink]="'/recipes/'+recipe.id">
+            View recipe
+          </a>
         </div>
       </div>
+    </div>
+    <div class="card-footer py-1 mt-1">
+      Last updated 3 mins ago by {{recipe.author.username}}
     </div>
   </div>
 </div>
