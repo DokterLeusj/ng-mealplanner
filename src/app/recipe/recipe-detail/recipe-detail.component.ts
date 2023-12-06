@@ -16,7 +16,6 @@ import {RecipeListDto} from "../model/recipe-list-dto";
   styleUrl: './recipe-detail.component.css'
 })
 export class RecipeDetailComponent {
-  @Input()
   recipe!: RecipeDetailDto;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) {
