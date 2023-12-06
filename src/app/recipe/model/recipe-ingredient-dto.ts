@@ -1,8 +1,8 @@
-import {FoodUnitDto} from "./food-unit-dto";
+import {FoodUnitNameDto} from "./food-unit-name-dto";
 import {IngredientNameDto} from "./ingredient-name-dto";
 
 export interface RecipeIngredientDto {
   qty:number;
-  foodUnit:FoodUnitDto;
+  foodUnit:FoodUnitNameDto;
   ingredient:IngredientNameDto;
 }
