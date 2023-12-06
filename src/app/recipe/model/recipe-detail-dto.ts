@@ -11,4 +11,5 @@ export interface RecipeDetailDto {
     username:string;
   }
   ingredients:RecipeIngredientDto[];
+//   instructions:RecipeInstructionDto[]
 }
