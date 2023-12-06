@@ -1,27 +1,20 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>carbonara</h1>
+      <h1>{{recipe.name}}</h1>
       <!--      IMG GOES HERE-->
       <div class="col-12 img-container-40vh ">
-        <img src="https://i.imgur.com/k6uG6ft.jpg" class="img-inheriting-height" alt=""/>
+        <img [src]="recipe.imgUrl" class="img-inheriting-height" alt=""/>
       </div>
       <!--      IMAGE STOPS HERE-->
-      <h2>by username </h2>
+      <h2>by {{recipe.author.username}} </h2>
       <h3>ingredients</h3>
-      <div>
-        serving x people
-      </div>
-      <div>400g (14oz) spaghetti</div>
-      <div>150g (5oz) pancetta or guanciale, diced</div>
-      <div>3 large eggs</div>
-      <div>1 cup (about 100g) Pecorino Romano cheese, grated</div>
-      <div>1 cup (about 100g) Parmesan cheese, grated</div>
-      <div>3 cloves garlic, minced</div>
-      <div>Freshly ground black pepper, to taste</div>
-      <div>Salt, to taste</div>
-      <div>Olive oil</div>
-      <div>Fresh parsley, chopped (for garnish)</div>
+      <ul>
+        <div *ngFor="let ingredient of recipe.ingredients; let i =index">
+          <li>{{ingredient.qty}} {{ingredient.foodUnit.name}} {{ingredient.ingredient.name}}</li>
+        </div>
+      </ul>
+
       <h3>recipe</h3>
       <p>Boil the Pasta:</p>
 
