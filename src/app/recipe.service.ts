@@ -15,4 +15,8 @@ export class RecipeService {
   getAllRecipes(): Observable<Array<RecipeListDto>> {
     return this.httpClient.get<Array<RecipeListDto>>(this.RECIPE_URL);
   }
+
+  getRecipeById(id: number): Observable<any>{
+    return this.httpClient.get(this.RECIPE_URL + '/' + id)
+  }
 }

@@ -9,6 +9,6 @@ export const routes: Routes = [
 //   TODO: hide test page unless developer after login
   {path:"style", component:StylePageComponent},
   {path:"recipes", component:RecipesPageComponent},
-  {path:"recipes/1", component:RecipeDetailComponent},
+  {path:"recipes/:id", component:RecipeDetailComponent},
 
 ];
