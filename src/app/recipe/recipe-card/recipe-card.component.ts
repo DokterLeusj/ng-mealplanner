@@ -25,7 +25,7 @@ export class RecipeCardComponent {
   }
   getRecipeImgUrl():string{
      return  this.recipe.imgUrl==null||this.recipe.imgUrl===""?
-       'https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato':
+       "assets/img/pexels-lukas-616401.jpg":
        this.recipe.imgUrl;
   }
 }
