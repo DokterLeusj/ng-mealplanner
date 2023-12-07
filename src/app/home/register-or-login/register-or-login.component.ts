@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
-import {AppComponent} from "../../app.component";
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register-or-login',
   standalone: true,
   imports: [],
   templateUrl: './register-or-login.component.html',
   styleUrl: './register-or-login.component.css'
 })
 export class RegisterOrLoginComponent {
-  loggedInUser:any= AppComponent.loggedInUser;
+
+  toggleRegisterNotLogin:boolean=true;
+  changeToggleRegisterNotLogin():void{
+    this.toggleRegisterNotLogin=!this.toggleRegisterNotLogin;
+  }
 }

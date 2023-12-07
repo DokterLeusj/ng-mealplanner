@@ -8,7 +8,7 @@
             Plan your meals with us.
           </h1>
         </div>
-        <app-register></app-register>
+        <app-register-or-login *ngIf="this.loggedInUser==null"></app-register-or-login>
 
 
 
