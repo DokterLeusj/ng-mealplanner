@@ -1,16 +1,44 @@
-<!--  based on toggle, show log in or register text.        -->
-<!--Proposal: create separate component to register or log in,
-passing the toggled variable true/false adjusting text accordingly-->
-<app-register-or-login-form></app-register-or-login-form>
-<div class="small">
+<div class="container-fluid" id="user-form">
 
-  Already a user? Click here to log in.
-  <br>
-  Not a user yet? Click here to register.
+  <h6>{{isRegisterNotLogin ? 'Register' : 'Log in'}}
+  </h6>
+
+  <!--  Input-->
+  <!--Email-->
+  <div>
+    <label for="userEmail">E-mail address </label>
+  </div>
+  <div>
+    <input id="userEmail" type="text" [formControl]="userRegisterEmail">
+  </div>
+  <!--Password-->
+  <div>
+    <label for="userPassword">Password <span (click)="toggleShowingPassword()">
+      <i class='fa-regular' [ngClass]="showingPassword?'fa-eye-slash small':'fa-eye small'"
+         [title]="showingPassword?'Show password.':'Hide password'"></i>
+    </span></label>
+  </div>
+  <div>
+    <input id="userPassword" [type]="getPasswordType()" [formControl]="userRegisterPassword">
+  </div>
+
+  <!--  Toggle register/login (login not implemented yet)-->
+<!--  <div>-->
+<!--    <a class="small" (click)="changeToggleRegisterNotLogin()">-->
+<!--      {{isRegisterNotLogin ? 'Already a user? Click here to log in.' : 'Not a user yet? Click here to register.'}}-->
+<!--    </a>-->
+<!--  </div>-->
+
+  <!--  Button-->
+  <div class="py-2">
+  <button class="btn btn-default"
+          (click)="runActionButtonMethods()"
+          title="Click to continue.">
+    {{isRegisterNotLogin ? 'Register' : 'Log in'}}
+  </button>
+  </div>
+
+  <div class="warning-text-color" *ngIf="showErrorFormatValidation()">{{getDisabledMessage()}}</div>
+  <div class="warning-text-color" *ngIf="showErrorCredentialsValidation()">{{getInvalidCredentialsMessage()}}</div>
+
 </div>
-
-<!--          <div class="pt-4">-->
-<!--            <a routerLink="/order">-->
-<!--              <button class="btn btn-default" role="button">Order here</button>-->
-<!--            </a>-->
-<!--          </div>-->
