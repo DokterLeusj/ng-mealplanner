@@ -21,16 +21,13 @@
       </ul>
 
       <h2>Instructions</h2>
+      <ol>
+        <div *ngFor="let instruction of recipe.instructions; let i =index">
+          <li>{{instruction.step}} {{instruction.instruction}}</li>
+        </div>
+      </ol>
 
-      <p>Boil a large pot of water. Add salt to the boiling water and cook the spaghetti according to the package instructions.</p>
 
-      <p>In a pan, brown the ground beef over medium-high heat. Add chopped onions and minced garlic. Cook until the onions are translucent.</p>
-
-      <p>Stir in tomato paste, canned tomatoes, oregano, basil, salt, and pepper. Simmer for 15-20 minutes, stirring occasionally.</p>
-
-      <p>Cook the spaghetti noodles until al dente. Drain the noodles and toss with the Bolognese sauce.</p>
-
-      <p>Serve the spaghetti Bolognese hot, topped with grated Parmesan cheese.</p>
       <!--      <div class="pokemon-types">-->
 
       <!--&lt;!&ndash;        todo:change app pokemon to recipe ingredients&ndash;&gt;-->

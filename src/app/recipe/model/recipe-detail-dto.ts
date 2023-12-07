@@ -1,4 +1,5 @@
 import {RecipeIngredientDto} from "./recipe-ingredient-dto";
+import {RecipeInstructionDto} from "./recipe-instruction-dto";
 
 export interface RecipeDetailDto {
   id:number;
@@ -11,5 +12,5 @@ export interface RecipeDetailDto {
     username:string;
   }
   ingredients:RecipeIngredientDto[];
-//   instructions:RecipeInstructionDto[]
+  instructions:RecipeInstructionDto[]
 }
