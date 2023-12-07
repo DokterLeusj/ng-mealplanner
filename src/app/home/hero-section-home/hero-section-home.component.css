@@ -13,7 +13,7 @@
   /*For xs bs*/
   .hero-section-bg {
     background-image:
-    url("/assets/img/pexels-toa-heftiba-şinca-940302.jpg");
+      url("/assets/img/pexels-toa-heftiba-şinca-940302.jpg");
     background-position-y: center;
   }
 
@@ -21,9 +21,9 @@
 @media only screen and (min-width: 768px) {
   /*For md and up bs*/
   .hero-section-bg {
-  background-image:  linear-gradient(to bottom, transparent, transparent, white),
-  radial-gradient(transparent, transparent, transparent, white),
-      url("/assets/img/pexels-element-digital-775031.jpg");
+    background-image:  linear-gradient(to bottom, transparent, transparent, white),
+    radial-gradient(transparent, transparent, transparent, white),
+    url("/assets/img/pexels-element-digital-775031.jpg");
     background-position-y: center;
   }
 
