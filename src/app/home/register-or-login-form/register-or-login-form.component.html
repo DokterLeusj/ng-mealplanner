@@ -1,0 +1,20 @@
+<div class="container-fluid" id="user-form">
+  <!--Email-->
+  <div>
+    <label for="userInputEmail">E-mail address </label>
+  </div>
+  <div>
+    <input id="userInputEmail" type="text" [formControl]="userInputEmail">
+  </div>
+  <!--Password-->
+  <div>
+    <label for="userInputPassword">Password <span (click)="toggleShowingPassword()">
+      <i *ngIf="showingPassword" class="fa-regular fa-eye-slash small" title="Show password."></i>
+      <i *ngIf="!showingPassword" class="fa-regular fa-eye small" title="Hide password"></i>
+    </span></label>
+  </div>
+  <div>
+    <input id="userInputPassword" [type]="getPasswordType()" [formControl]="userInputPassword">
+
+  </div>
+</div>
