@@ -37,9 +37,11 @@ h5{/*  Used for card titles*/
   padding: 0;
   margin: 0;
 }
-.warning-text-color{
+
+.warning-text-form{
   color:  var(--color-warning);
   font-weight: 400;
+  font-size: small;
 }
 
 
@@ -59,7 +61,14 @@ h5{/*  Used for card titles*/
   --bs-btn-bg: var(--color-medium-dark);
   --bs-btn-hover-bg: var(--color-medium-light);
 }
-
+.btn-disabled{
+  --bs-btn-color:var(--color-muted);
+  --bs-btn-hover-color:var(--bs-btn-color);
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-bg: transparent;
+  --bs-btn-border-color: var(--bs-btn-color);
+  --bs-btn-hover-border-color: var(--bs-btn-color);
+}
 .img-container-40vh{
   max-height: 40vh;
 }
@@ -68,4 +77,6 @@ h5{/*  Used for card titles*/
   max-height: inherit;
   max-width: 100%;
 }
-
+label{
+  font-size: small;
+}
