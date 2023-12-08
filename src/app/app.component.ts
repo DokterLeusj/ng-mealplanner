@@ -6,6 +6,7 @@ import {FooterComponent} from "./ui/footer/footer.component";
 import {StylePageComponent} from "./style-page/style-page.component";
 import {HttpClientModule} from "@angular/common/http";
 import {RegisterOrLoginComponent} from "./home/register-or-login/register-or-login.component";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import {RegisterOrLoginComponent} from "./home/register-or-login/register-or-log
     FooterComponent,
     StylePageComponent,
     HttpClientModule,
-    RegisterOrLoginComponent
+    RegisterOrLoginComponent,
+    NgMultiSelectDropDownModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
