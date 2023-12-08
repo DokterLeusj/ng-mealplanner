@@ -3,6 +3,8 @@ import {RecipeCardComponent} from "../recipe-card/recipe-card.component";
 import {RecipeListDto} from "../model/recipe-list-dto";
 import {NgForOf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
+import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
+import {RecipeFilterService} from "../../recipe-filter.service";
 
 @Component({
   selector: 'app-recipes-page',
@@ -10,17 +12,25 @@ import {RecipeService} from "../../recipe.service";
   imports: [
     RecipeCardComponent,
     NgForOf,
+    RecipeFilterComponent,
   ],
   templateUrl: './recipes-page.component.html',
   styleUrl: './recipes-page.component.css'
 })
 export class RecipesPageComponent {
   recipes: Array<RecipeListDto> =[];
-  constructor(private recipeService:RecipeService) {
+  constructor(private recipeService:RecipeService, private recipeFilterService: RecipeFilterService) {
     this.recipeService.getAllRecipes().subscribe(response =>{
       this.recipes=response;
     })
+    this.recipeFilterService.filter.subscribe(data => {
+      console.log(data);
+    });
   }
+
+
+
+
   // recipes: Array<RecipeListDto> = [
   //   {
   //     id: 1,
