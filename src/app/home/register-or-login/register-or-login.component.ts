@@ -56,15 +56,10 @@ export class RegisterOrLoginComponent {
     return this.isButtonActionClicked && !this.isValidCredentials();
   }
 
-  getInvalidCredentialsMessage(): string {
-    return "This email address is already in use."
-  }
-  getDisabledMessage():string {
-    return "Please make all fields valid.";
-  }
+
   isValidCredentials(): boolean {
     return false;
+  //   Can use form group validation here
   }
 
-  protected readonly console = console;
 }

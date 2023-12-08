@@ -37,9 +37,11 @@ h5{/*  Used for card titles*/
   padding: 0;
   margin: 0;
 }
-.warning-text-color{
+
+.warning-text-form{
   color:  var(--color-warning);
   font-weight: 400;
+  font-size: small;
 }
 
 

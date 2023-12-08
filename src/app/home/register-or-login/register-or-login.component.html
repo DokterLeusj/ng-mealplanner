@@ -13,8 +13,8 @@
       <input id="userEmail" type="email" formControlName="userRegisterEmail">
     </div>
     <!--  Email validation messages-->
-    <div class="warning-text-color small"
-         *ngIf="!credentialsForm.get('userRegisterEmail')?.valid && credentialsForm.get('userRegisterEmail')?.touched">
+    <div class="warning-text-form"
+         *ngIf="credentialsForm.get('userRegisterEmail')?.invalid && (credentialsForm.get('userRegisterEmail')?.touched||isButtonActionClicked)">
       <div *ngIf="credentialsForm.get('userRegisterEmail')?.errors?.['required']">This field is required.</div>
       <div *ngIf="credentialsForm.get('userRegisterEmail')?.errors?.['email']">Please enter a valid email address.</div>
     </div>
@@ -30,8 +30,8 @@
       <input id="userPassword" [type]="getPasswordType()" formControlName="userRegisterPassword">
     </div>
     <!--  Password validation messages-->
-    <div class="warning-text-color small"
-         *ngIf="credentialsForm.get('userRegisterPassword')?.invalid && credentialsForm.get('userRegisterPassword')?.touched">
+    <div class="warning-text-form"
+         *ngIf="credentialsForm.get('userRegisterPassword')?.invalid && (credentialsForm.get('userRegisterPassword')?.touched||isButtonActionClicked)">
       <div *ngIf="credentialsForm.get('userRegisterPassword')?.errors?.['required']">This field is required.</div>
       <div *ngIf="credentialsForm.get('userRegisterPassword')?.errors?.['pattern']">
         A password must be
@@ -60,7 +60,8 @@
     </button>
   </div>
 
-  <!--  <div class="warning-text-color" *ngIf="isButtonActionClicked&&userRegisterPassword.invalid&&userRegisterEmail.invalid">{{getDisabledMessage()}}</div>-->
-  <!--  <div class="warning-text-color" *ngIf="showErrorCredentialsValidation()">{{getInvalidCredentialsMessage()}}</div>-->
+    <div class="warning-text-form" *ngIf="isButtonActionClicked&&this.credentialsForm.invalid">Please make all fields valid so there are no more error messages.</div>
+  <!--  <div class="warning-text-form" *ngIf="showErrorCredentialsValidation()">This email address is already in use.</div>-->
+<!--  Documentation on form, including submit info: https://angular.io/guide/reactive-forms-->
 
 </div>
