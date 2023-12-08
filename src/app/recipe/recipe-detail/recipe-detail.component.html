@@ -1,45 +1,30 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>{{recipe.name}}</h1>
+      <h1>{{ recipe.name }}</h1>
       <div> by
-        <!--      <a [routerLink]="'/users/'+recipe.author.id">-->
+
         <a href="#" [title]="'Go to '+recipe.author.username+' profile page.'">
-          {{recipe.author.username}}
-        </a> </div>
+          {{ recipe.author.username }}
+        </a></div>
       <!--      IMG GOES HERE-->
       <div class="col-12 img-container-40vh ">
         <img [src]="recipe.imgUrl" class="img-inheriting-height" alt=""/>
       </div>
-      <!--      IMAGE STOPS HERE-->
 
       <h2>Ingredients</h2>
       <ul>
-        <div *ngFor="let ingredient of recipe.ingredients; let i =index">
-          <li>{{ingredient.qty}} {{ingredient.foodUnit.name}} {{ingredient.ingredient.name}}</li>
+        <div *ngFor="let ingredient of recipe.ingredients">
+          <li>{{ ingredient.qty }} {{ ingredient.foodUnit.name }} {{ ingredient.ingredient.name }}</li>
         </div>
       </ul>
 
       <h2>Instructions</h2>
-
-      <p>Boil a large pot of water. Add salt to the boiling water and cook the spaghetti according to the package instructions.</p>
-
-      <p>In a pan, brown the ground beef over medium-high heat. Add chopped onions and minced garlic. Cook until the onions are translucent.</p>
-
-      <p>Stir in tomato paste, canned tomatoes, oregano, basil, salt, and pepper. Simmer for 15-20 minutes, stirring occasionally.</p>
-
-      <p>Cook the spaghetti noodles until al dente. Drain the noodles and toss with the Bolognese sauce.</p>
-
-      <p>Serve the spaghetti Bolognese hot, topped with grated Parmesan cheese.</p>
-      <!--      <div class="pokemon-types">-->
-
-      <!--&lt;!&ndash;        todo:change app pokemon to recipe ingredients&ndash;&gt;-->
-      <!--&lt;!&ndash;        nice to have; symbols w every food type?&ndash;&gt;-->
-      <!--&lt;!&ndash;        <app-pokemon-type&ndash;&gt;-->
-      <!--&lt;!&ndash;          *ngFor="let type of pokemon.types"&ndash;&gt;-->
-      <!--&lt;!&ndash;          [type]="type"&ndash;&gt;-->
-      <!--&lt;!&ndash;        ></app-pokemon-type>&ndash;&gt;-->
-      <!--      </div>-->
+      <ol>
+        <div *ngFor="let instruction of recipe.instructions">
+          <li> {{ instruction.instruction }}</li>
+        </div>
+      </ol>
     </div>
 
   </div>
