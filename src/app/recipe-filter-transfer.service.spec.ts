@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RecipeFilterService } from './recipe-filter.service';
+import { RecipeFilterTransferService } from './recipe-filter-transfer.service';
 
 describe('RecipeFilterService', () => {
-  let service: RecipeFilterService;
+  let service: RecipeFilterTransferService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RecipeFilterService);
+    service = TestBed.inject(RecipeFilterTransferService);
   });
 
   it('should be created', () => {

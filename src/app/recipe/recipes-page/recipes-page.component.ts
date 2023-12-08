@@ -4,7 +4,7 @@ import {RecipeListDto} from "../model/recipe-list-dto";
 import {NgForOf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
-import {RecipeFilterService} from "../../recipe-filter.service";
+import {RecipeFilterTransferService} from "../../recipe-filter-transfer.service";
 
 @Component({
   selector: 'app-recipes-page',
@@ -19,12 +19,13 @@ import {RecipeFilterService} from "../../recipe-filter.service";
 })
 export class RecipesPageComponent {
   recipes: Array<RecipeListDto> =[];
-  constructor(private recipeService:RecipeService, private recipeFilterService: RecipeFilterService) {
+  filter:any;
+  constructor(private recipeService:RecipeService, private recipeFilterService: RecipeFilterTransferService) {
     this.recipeService.getAllRecipes().subscribe(response =>{
       this.recipes=response;
     })
     this.recipeFilterService.filter.subscribe(data => {
-      console.log(data);
+     this.filter=data;
     });
   }
 

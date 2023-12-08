@@ -10,7 +10,15 @@ import {RegisterOrLoginComponent} from "./home/register-or-login/register-or-log
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, NavbarComponent, FooterComponent, StylePageComponent, HttpClientModule,RegisterOrLoginComponent],
+  imports: [CommonModule,
+    RouterOutlet,
+    RouterLink,
+    NavbarComponent,
+    FooterComponent,
+    StylePageComponent,
+    HttpClientModule,
+    RegisterOrLoginComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

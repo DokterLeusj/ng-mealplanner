@@ -4,7 +4,7 @@ import {Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class RecipeFilterService {
+export class RecipeFilterTransferService {
   private recipeFilterSource=new Subject<any>();
   filter=this.recipeFilterSource.asObservable();
   sendFilter(data:any){
