@@ -4,6 +4,8 @@
   --color-black:black;
   --color-base: #eeeadc;
   --color-light-light: #f8ebb5;
+  --color-bright: #fee34e;
+  --color-bright-light: #fafa33;
   --color-light: #f8a663;
   --color-light-dark: #ff6f22;
   --color-medium-light: #90cf44;
@@ -68,6 +70,15 @@ h5{/*  Used for card titles*/
   --bs-btn-hover-bg: transparent;
   --bs-btn-border-color: var(--bs-btn-color);
   --bs-btn-hover-border-color: var(--bs-btn-color);
+}
+.btn-toggle{
+  --bs-btn-color:var(--color-dark);
+  --bs-btn-hover-color:var(--bs-btn-color);
+  --bs-btn-bg: var(--color-bright);
+  --bs-btn-hover-bg: var(--color-bright-light);
+  --bs-btn-border-color: transparent;
+  --bs-btn-hover-border-color: var(--bs-btn-border-color);
+  border-radius: 0.5rem;
 }
 .img-container-40vh{
   max-height: 40vh;

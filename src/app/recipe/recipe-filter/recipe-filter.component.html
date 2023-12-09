@@ -1,5 +1,8 @@
+<div class="filter-form pt-1 p-2 mb-1">
+
 <form [formGroup]="recipeFilterForm">
-    <div *ngFor="let formControlName of getFormGroupControlNames()">
+    <div class="row" >
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let formControlName of getFormGroupControlNames()">
         <div>
             <label class="text-capitalize" [for]="formControlName">{{TextUtility.getLabelFromVarName(formControlName)}}</label>
         </div>
@@ -12,6 +15,9 @@
             ></ng-multiselect-dropdown>
         </div>
     </div>
+    </div>
 </form>
+</div>
 
-<button type="button" class="btn btn-default" (click)="sendFilter()">Find recipes</button>
+
+<button type="button" class="btn btn-default mt-1" (click)="sendFilter()">Find recipes</button>

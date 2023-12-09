@@ -19,16 +19,25 @@ export class StylePageComponent {
   }
   private loadStyles() {
     let colors: Array<string> = [
-      "--color-white",
-      "--color-base",
-      "--color-light",
-      "--color-medium-light",
-      "--color-medium-dark",
-      "--color-dark",
+    "--color-white",
+    "--color-base",
+    "--color-light-light",
+    "--color-bright",
+    "--color-light",
+    "--color-light-dark",
+    "--color-medium-light",
+    "--color-medium-dark",
+    "--color-dark",
+    "--color-muted",
+      "--color-black",
+    "--color-warning",
+
+
     ];
 
-    for (let color of colors) {
       for (let bgColor of colors) {
+        for (let color of colors) {
+
         if (color !== bgColor) {
           this.styles.push({
            css:`color:var(${color}); background-color: var(${bgColor}); `,
