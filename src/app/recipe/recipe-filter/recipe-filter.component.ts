@@ -3,11 +3,11 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {RecipeFilterTransferService} from "../../recipe-filter-transfer.service";
 import {RecipeService} from "../../recipe.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {IDropdownSettings, NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {RecipeListDto} from "../model/recipe-list-dto";
+import {ArrayUtility} from "../../util/array-utility";
 import {TextUtility} from "../../util/text-utility";
 
-class List<T> {
-}
 
 @Component({
     selector: 'app-recipe-filter',
@@ -22,14 +22,8 @@ class List<T> {
     styleUrl: './recipe-filter.component.css'
 })
 export class RecipeFilterComponent {
-    allRecipes: object[] = [];
-    dietaryPreferences: string[] = ["vegetarian", "pork"];
-    ingredients: string[] = ["cheese", "potato", "onion"];
-    authors: string[] = ["jantje", "kevin1", "garnaalmaster22"];
-
-    selectedRecipes: object[] = [];
-    // dropdownRecipeNames: object
-
+    protected readonly TextUtility = TextUtility;
+    allRecipes: RecipeListDto[] = [];
     dropdownSettings = { //IDropdownSettings
         singleSelection: false,
         idField: 'id',
@@ -42,31 +36,11 @@ export class RecipeFilterComponent {
 
     recipeFilterForm = new FormGroup({
         recipeName: new FormControl([]),
-        ingredient: new FormControl([]),
-        dietaryPreference: new FormControl([]),
-        author: new FormControl([])
+        author: new FormControl([]),
+        // Need Dto with categories and ingredients first
+        // excludedCategory: new FormControl([]),
+        // excludedIngredient: new FormControl([]),
     });
-
-
-    getFormControlData(formControlName: string) {
-        if(formControlName=== "recipeName"){
-            return this.allRecipes;
-        }else if(formControlName==="ingredient"){
-
-        }else  if(formControlName==="dietaryPreference"){
-
-        }else       if(formControlName==="author"){
-
-        }
-        return [];
-    }
-
-    getFormGroupControlNames(): string[] {
-        return Object.keys(this.recipeFilterForm.controls);
-    }
-
-    formControlName: string = "recipeName";
-
 
     constructor(private filterService: RecipeFilterTransferService,
                 private recipeService: RecipeService,
@@ -74,17 +48,33 @@ export class RecipeFilterComponent {
     ) {
         recipeService.getAllRecipes().subscribe(
             response => {
-                this.allRecipes = response.map(r => ({id: r.id, name: r.name}))
+                this.allRecipes = response.filter(Boolean);
             });
     }
 
+    getFormControlData(formControlName: string) {
+        let returnData: Array<any> = [];
+        if (formControlName === "recipeName") {
+            returnData = this.allRecipes.map(sr => ({id: sr.id, name: sr.name}))
+        } else if (formControlName === "author") {
+            returnData = this.allRecipes
+                .map(sr => ({id: sr.author.id, name: sr.author.username}))
+        } else if (formControlName === "excludedCategory") {
+
+        } else if (formControlName === "excludedIngredient") {
+
+        }
+        return returnData
+            .filter((value, index, array) => ArrayUtility.uniqueIdFilterObject(value, index, array))
+            .sort((v1, v2) => v1.name.toLowerCase() > v2.name.toLowerCase() ? 1 : -1);
+    }
+
+    getFormGroupControlNames(): string[] {
+        return Object.keys(this.recipeFilterForm.controls);
+    }
 
     sendFilter() {
         this.filterService.sendFilter(this.recipeFilterForm.getRawValue());
-
-
-        // console.log(JSON.stringify(this.recipeFilterForm.getRawValue()))
     }
 
-    protected readonly TextUtility = TextUtility;
 }
