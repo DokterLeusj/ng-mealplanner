@@ -1,16 +1,16 @@
 <form [formGroup]="recipeFilterForm">
-    <div>
-        <label for="recipeName">Recipe name</label>
-    </div>
-    <div>
-        <ng-multiselect-dropdown
-                id="recipeName"
-                placeholder="Search..."
-                [settings]="dropdownSettings"
-                [data]="allRecipes"
-                formControlName="recipeName"
-        >
-        </ng-multiselect-dropdown>
+    <div *ngFor="let formControlName of getFormGroupControlNames()">
+        <div>
+            <label class="text-capitalize" [for]="formControlName">{{TextUtility.getLabelFromVarName(formControlName)}}</label>
+        </div>
+        <div>
+              <ng-multiselect-dropdown
+                    [id]="formControlName"
+                    placeholder="Search..."
+                    [settings]="dropdownSettings"
+                    [data]="getFormControlData(formControlName)"
+            ></ng-multiselect-dropdown>
+        </div>
     </div>
 </form>
 
