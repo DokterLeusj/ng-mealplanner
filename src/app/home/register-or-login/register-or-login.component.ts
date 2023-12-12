@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule, Validators,
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-register-or-login',
@@ -18,16 +19,20 @@ import {NgClass, NgIf} from "@angular/common";
   styleUrl: './register-or-login.component.css'
 })
 export class RegisterOrLoginComponent {
-   credentialsForm= new FormGroup({
-    userRegisterEmail: new FormControl("",[Validators.email,Validators.required]),
-    userRegisterPassword: new FormControl("",[Validators.required,Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
+  constructor(private authService: AuthService) {
+  }
+
+
+  credentialsForm = new FormGroup({
+    userRegisterEmail: new FormControl("", [Validators.email, Validators.required]),
+    userRegisterPassword: new FormControl("", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
   });
 
   isRegisterNotLogin: boolean = true;
   showingPassword: boolean = false;
   isButtonActionClicked: boolean = false;
 
-    changeToggleRegisterNotLogin(): void {
+  changeToggleRegisterNotLogin(): void {
     this.isRegisterNotLogin = !this.isRegisterNotLogin; // Login not implemented yet
   }
 
@@ -49,8 +54,17 @@ export class RegisterOrLoginComponent {
     // if email not registered yet, display registration successful & go to Home
   }
 
-  //todo
+
   attemptLogin() {
+    if (this.credentialsForm.valid) {
+      console.log(this.credentialsForm.getRawValue())
+      const email = this.credentialsForm.getRawValue().userRegisterEmail
+      const password = this.credentialsForm.getRawValue().userRegisterPassword
+      this.authService.sendLoginRequest(email, password).subscribe(response => {
+        this.authService.saveCredentialsLocally(email,password);
+
+      })
+    }
 
   }
 
@@ -61,7 +75,7 @@ export class RegisterOrLoginComponent {
 
   isValidCredentials(): boolean {
     return false;
-  //   Can use form group validation here
+    //   Can use form group validation here
   }
 
 }
