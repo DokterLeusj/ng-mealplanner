@@ -1,6 +1,6 @@
 <div class="container-fluid" id="user-form">
 
-  <h6>{{isRegisterNotLogin ? 'Register' : 'Log in'}}
+  <h6>{{ isRegisterNotLogin ? 'Register' : 'Log in' }}
   </h6>
 
   <!--  Input-->
@@ -45,23 +45,25 @@
   </form>
 
   <!--  Toggle register/login (login not implemented yet)-->
-  <!--  <div>-->
-  <!--    <a class="small" (click)="changeToggleRegisterNotLogin()">-->
-  <!--      {{isRegisterNotLogin ? 'Already a user? Click here to log in.' : 'Not a user yet? Click here to register.'}}-->
-  <!--    </a>-->
-  <!--  </div>-->
+  <div>
+    <a class="small" (click)="changeToggleRegisterNotLogin()">
+      {{ isRegisterNotLogin ? 'Already a user? Click here to log in.' : 'Not a user yet? Click here to register.' }}
+    </a>
+  </div>
 
   <!--  Button-->
   <div class="py-2">
     <button class="btn btn-default"
             (click)="runActionButtonMethods()"
             title="Click to continue.">
-      {{isRegisterNotLogin ? 'Register' : 'Log in'}}
+      {{ isRegisterNotLogin ? 'Register' : 'Log in' }}
     </button>
   </div>
 
-    <div class="warning-text-form" *ngIf="isButtonActionClicked&&this.credentialsForm.invalid">Please make all fields valid so there are no more error messages.</div>
+  <div class="warning-text-form" *ngIf="isButtonActionClicked&&this.credentialsForm.invalid">Please make all fields
+    valid so there are no more error messages.
+  </div>
   <!--  <div class="warning-text-form" *ngIf="showErrorCredentialsValidation()">This email address is already in use.</div>-->
-<!--  Documentation on form, including submit info: https://angular.io/guide/reactive-forms-->
+  <!--  Documentation on form, including submit info: https://angular.io/guide/reactive-forms-->
 
 </div>

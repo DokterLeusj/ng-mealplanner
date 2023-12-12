@@ -28,7 +28,7 @@ export class RegisterOrLoginComponent {
   isButtonActionClicked: boolean = false;
 
     changeToggleRegisterNotLogin(): void {
-    // this.isRegisterNotLogin = !this.isRegisterNotLogin; // Login not implemented yet
+    this.isRegisterNotLogin = !this.isRegisterNotLogin; // Login not implemented yet
   }
 
   toggleShowingPassword(): void {
@@ -49,7 +49,9 @@ export class RegisterOrLoginComponent {
     // if email not registered yet, display registration successful & go to Home
   }
 
+  //todo
   attemptLogin() {
+
   }
 
   showErrorCredentialsValidation(): boolean {
