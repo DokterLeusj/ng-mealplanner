@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {RecipeCardComponent} from "../recipe-card/recipe-card.component";
-import {RecipeListDto} from "../model/recipe-list-dto";
+import {RecipeListDto} from "../model/dto/recipe-list-dto";
 import {NgClass, NgForOf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
@@ -24,8 +24,8 @@ export class RecipesPageComponent {
   isShowFilter=true;
   constructor(private recipeService:RecipeService) {
     this.recipeService.getAllRecipes().subscribe(response =>{
-      this.allRecipes=response;
-      this.displayedRecipes=response;
+      this.allRecipes=response.filter(Boolean);
+      this.displayedRecipes=this.allRecipes;
     })
   }
   toggleDisplayFilter():void{
@@ -37,6 +37,7 @@ export class RecipesPageComponent {
 
   filterRecipes(filter:object){
     this.updateFilter(filter);
+    console.log(JSON.stringify(this.filter))
     // this.displayedRecipes=
       // this.allRecipes.
   }

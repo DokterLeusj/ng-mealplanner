@@ -8,11 +8,13 @@
           {{isShowFilter ? "Close filter" : "Show filter"}}
           <i class="fa-solid small" [ngClass]="isShowFilter?'fa-caret-up':'fa-caret-down'"></i></button>
         <app-recipe-filter [isShowFilter]="isShowFilter" (filterEvent)="filterRecipes($event)"></app-recipe-filter>
-        <!--                Recipe cards-->
+
+        <!--Recipe cards-->
         <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
-          <app-recipe-card *ngFor="let recipe of allRecipes" [recipe]="recipe"></app-recipe-card>
+          <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>
         </div>
       </div>
     </div>
   </div>
 </div>
+

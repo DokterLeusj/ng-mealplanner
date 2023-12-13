@@ -1,19 +1,23 @@
 <button type="button" class="btn btn-default mb-1" (click)="updateSendFilter()">Find recipes</button>
+
 <div class="filter-form pt-1 p-2 mb-1" [ngClass]="isShowFilter?'':'d-none'">
-  <form [formGroup]="recipeFilterForm" >
-    <div class="row d-flex justify-content-between"  >
+  <form [formGroup]="recipeFilterForm">
+    <div class="row d-flex justify-content-between">
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
-           *ngFor="let formControlName of getFormGroupControlNames()">
+           *ngFor="let filter of filters">
         <div>
-          <label class="text-capitalize"
-                 [for]="formControlName">{{TextUtility.getLabelFromVarName(formControlName)}}</label>
+          <label [for]="filter.controlKey">{{filter.label}}</label>
         </div>
-        <div>
+        <div *ngIf="filter.controlType=='text'">
+          <input [id]="filter.controlKey" type="text" placeholder="Search ..." [formControlName]="filter.controlKey">
+        </div>
+        <div *ngIf="filter.controlType=='dropdown'">
           <ng-multiselect-dropdown
-            [id]="formControlName"
-            placeholder="Search..."
+            [id]="filter.controlKey"
+            [formControlName]="filter.controlKey"
+            placeholder="Search ..."
             [settings]="dropdownSettings"
-            [data]="getFormDropdownValues(formControlName)"
+            [data]="filter.options"
           ></ng-multiselect-dropdown>
         </div>
       </div>
