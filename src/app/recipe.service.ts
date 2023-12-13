@@ -26,10 +26,7 @@ export class RecipeService {
       let params=new HttpParams();
       console.log(filter)
     if (filter.nameContains!=undefined) {
-      console.log("nameContains "+filter.nameContains)
       params=params.set("nameContains", filter.nameContains);
-      console.log(params.toString());
-
     }
     if (filter.authorIds) {
       for (const author of filter.authorIds) {
@@ -44,9 +41,11 @@ export class RecipeService {
     if (filter.dietaryNeedIds) {
       for (const diet of filter.dietaryNeedIds) {
         params= params.append("dietaryNeedIds", diet.toString());
+        console.log(diet.toString());
+
       }
     }
-    console.log(params.toString());
+    console.log(JSON.stringify(params.get("dietaryNeedIds")));
     console.log('Request URL:', this.RECIPE_FILTER_URL, '?', params.toString());
       return this.httpClient.get<Array<RecipeListDto>>(this.RECIPE_FILTER_URL, {params:params})
         // .pipe(

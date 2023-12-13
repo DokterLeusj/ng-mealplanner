@@ -5,7 +5,7 @@ import {NgClass, NgForOf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
 import {RecipesFilter} from "../model/recipes-filter";
-import {RecipeDropdown} from "../model/recipe-dropdown";
+import {RecipeFilterField} from "../model/recipe-filter-field";
 
 @Component({
   selector: 'app-recipes-page',

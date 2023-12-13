@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, Output,  ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {RecipeDropdown} from "../model/recipe-dropdown";
+import {RecipeFilterField} from "../model/recipe-filter-field";
 import {RecipeService} from "../../recipe.service";
 import {RecipesFilter} from "../model/recipes-filter";
 
@@ -16,7 +16,8 @@ import {RecipesFilter} from "../model/recipes-filter";
     NgIf, NgForOf, NgMultiSelectDropDownModule, NgClass
   ],
   templateUrl: './recipe-filter.component.html',
-  styleUrl: './recipe-filter.component.css'
+  styleUrl: './recipe-filter.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class RecipeFilterComponent {
   @Input()
@@ -41,20 +42,21 @@ export class RecipeFilterComponent {
     dietaryNeed:new FormControl([]),
   });
 
-  dropdownsInfo: RecipeDropdown[] = [
-    new RecipeDropdown("recipeNameControl",
+  dropdownsInfo: RecipeFilterField[] = [
+    new RecipeFilterField("recipeNameControl",
       "Title contains: ",
-      'text',
+      'text'
     ),
-    new RecipeDropdown("authorControl",
+    new RecipeFilterField("authorControl",
       "Author(s)",
       'dropdown'
     ),
-    new RecipeDropdown("excludedCategory",
+    new RecipeFilterField("excludedCategory",
       "Excluded category(s)",
-      'dropdown'
+      'dropdown',
+        // this.recipeService.getAllFoodCategories
     ),
-    new RecipeDropdown("dietaryNeed",
+    new RecipeFilterField("dietaryNeed",
       "Dietary needs",
       'dropdown'),
   ];
@@ -71,12 +73,10 @@ export class RecipeFilterComponent {
         // })));
       } else if (dropdown.controlKey == "excludedCategory") {
         this.recipeService.getAllFoodCategories().subscribe(response => dropdown.setOptions(response))
-      } else if (dropdown.controlKey == "dietaryNeeds") {
-        this.recipeService.getAllDiets().subscribe(response => dropdown.setOptions(response))
+      } else if (dropdown.controlKey == "dietaryNeed") {
+        this.recipeService.getAllDiets().subscribe(response => dropdown.setOptions(response));
       }
     }
-
-    // }
   }
 
   updateSendFilter() {
@@ -87,18 +87,13 @@ export class RecipeFilterComponent {
     const formValues=this.recipeFilterForm.getRawValue();
     return {
       nameContains:formValues.recipeNameControl,
-      authorIds:formValues.authorControl,
-      excludedCategoryIds:formValues.excludedCategory,
-      dietaryNeedIds:formValues.dietaryNeed
+      authorIds:this.getFormControlArrayIds(formValues.authorControl),
+      excludedCategoryIds:this.getFormControlArrayIds(formValues.excludedCategory),
+      dietaryNeedIds:this.getFormControlArrayIds(formValues.dietaryNeed)
     };
   }
-
-  getCategoryArr() {
-    return []
-  }
-
-  getIngredientArr() {
-    return []
+  getFormControlArrayIds(objArr:any[]):number[]{
+    return objArr.map(o=>o.id);
   }
 
   sendFilter(value: RecipesFilter

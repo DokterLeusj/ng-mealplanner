@@ -1,93 +1,169 @@
 :root {
-  /* Colors */
-  --color-white:white;
-  --color-black:black;
-  --color-base: #eeeadc;
-  --color-light-light: #f8ebb5;
-  --color-bright: #fee34e;
-  --color-bright-light: #fafa33;
-  --color-light: #f8a663;
-  --color-light-dark: #ff6f22;
-  --color-medium-light: #90cf44;
-  --color-medium-dark: #59B512;
-  /*--color-medium-alt: #8A3E73;*/
-  --color-dark: #311269;
-  --color-muted: rgba(34, 39, 47, 0.82);
-  --color-warning:#FF282A;
+    /* Colors */
+    --color-white: white;
+    --color-black: var(--color-muted);
+    --color-base: #eeeadc;
+    --color-light-light: #f8ebb5;
+    --color-bright: #fee34e;
+    --color-bright-light: #fafa33;
+    --color-light: #f8a663;
+    --color-light-dark: #ff6f22;
+    --color-medium-light: #90cf44;
+    --color-medium-dark: #59B512;
+    --color-medium-darkest: #376e0d;
+
+    /*--color-medium-alt: #8A3E73;*/
+    --color-dark: #311269;
+    --color-muted: rgba(34, 39, 47, 0.82);
+    --color-warning: #FF282A;
 
 }
 
 body {
-  font-family: 'Lexend', sans-serif;
-  font-weight: 300;
-  font-size: 0.9rem;
-  background-color: var(--color-white);
-  color:var(--color-black);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    background-color: var(--color-white);
+    color: var(--color-black);
 }
 
-h1 {   /*Use for page titles only*/
-  font-weight: 100;
-  font-size: xx-large;
-  color:var(--color-medium-dark);
+h1 { /*Use for page titles only*/
+    font-weight: 100;
+    font-size: xx-large;
+    color: var(--color-medium-dark);
 }
-h2{ /*Use for in page titles only*/
-  font-weight: 300;
+
+h2 { /*Use for in page titles only*/
+    font-weight: 300;
 }
-h5{/*  Used for card titles*/
+
+h5 { /*  Used for card titles*/
 }
+
 .container-fluid {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
-.warning-text-form{
-  color:  var(--color-warning);
-  font-weight: 400;
-  font-size: small;
+.warning-text-form {
+    color: var(--color-warning);
+    font-weight: 400;
+    font-size: small;
 }
 
 
-.btn{
-  --bs-btn-font-size: 1rem;
-  --bs-btn-font-weight: 300;
-  --bs-btn-padding-x: 0.8rem;
-  --bs-btn-padding-y: 0rem;
-  --bs-btn-line-height: 1.5rem;
-  --bs-btn-border-color: transparent;
-  --bs-btn-hover-border-color: transparent;
-  border-radius: 1rem;
+.btn {
+    --bs-btn-font-size: 1rem;
+    --bs-btn-font-weight: 300;
+    --bs-btn-padding-x: 0.8rem;
+    --bs-btn-padding-y: 0rem;
+    --bs-btn-line-height: 1.5rem;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-border-color: transparent;
+    border-radius: 1rem;
 }
+
 .btn-default {
-  --bs-btn-color:var(--color-white);
-  --bs-btn-hover-color:var(--bs-btn-color);
-  --bs-btn-bg: var(--color-medium-dark);
-  --bs-btn-hover-bg: var(--color-medium-light);
-}
-.btn-disabled{
-  --bs-btn-color:var(--color-muted);
-  --bs-btn-hover-color:var(--bs-btn-color);
-  --bs-btn-bg: transparent;
-  --bs-btn-hover-bg: transparent;
-  --bs-btn-border-color: var(--bs-btn-color);
-  --bs-btn-hover-border-color: var(--bs-btn-color);
-}
-.btn-toggle{
-  --bs-btn-color:var(--color-dark);
-  --bs-btn-hover-color:var(--bs-btn-color);
-  --bs-btn-bg: var(--color-bright);
-  --bs-btn-hover-bg: var(--color-bright-light);
-  --bs-btn-border-color: transparent;
-  --bs-btn-hover-border-color: var(--bs-btn-border-color);
-  border-radius: 0.5rem;
-}
-.img-container-40vh{
-  max-height: 40vh;
+    --bs-btn-color: var(--color-white);
+    --bs-btn-hover-color: var(--bs-btn-color);
+    --bs-btn-bg: var(--color-medium-dark);
+    --bs-btn-hover-bg: var(--color-medium-light);
 }
 
-.img-inheriting-height{
-  max-height: inherit;
-  max-width: 100%;
+.btn-disabled {
+    --bs-btn-color: var(--color-muted);
+    --bs-btn-hover-color: var(--bs-btn-color);
+    --bs-btn-bg: transparent;
+    --bs-btn-hover-bg: transparent;
+    --bs-btn-border-color: var(--bs-btn-color);
+    --bs-btn-hover-border-color: var(--bs-btn-color);
 }
-label{
-  font-size: small;
+
+.btn-toggle {
+    --bs-btn-color: var(--color-dark);
+    --bs-btn-hover-color: var(--bs-btn-color);
+    --bs-btn-bg: var(--color-bright);
+    --bs-btn-hover-bg: var(--color-bright-light);
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-border-color: var(--bs-btn-border-color);
+    border-radius: 0.5rem;
 }
+
+.img-container-40vh {
+    max-height: 40vh;
+}
+
+.img-inheriting-height {
+    max-height: inherit;
+    max-width: 100%;
+}
+
+label {
+    font-size: small;
+}
+
+
+form {
+    --bg-color: var(--color-white);
+    --base-color: var(--color-medium-darkest);
+    --border-color: var(--color-light-light);
+
+    text-align: left;
+    vertical-align: middle;
+    font-size: small;
+
+    .search-field, .multiselect-dropdown .dropdown-btn {
+        background-color: var(--bg-color);
+        display: inline-block;
+        width: 100%;
+        border: 1px transparent !important;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        line-height: 1.52857143;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .multiselect-dropdown .dropdown-btn .selected-item {
+        border: transparent !important;
+        border-radius: 2px !important;
+        margin-right: 4px;
+        margin-bottom: 2px;
+        background: var(--base-color) !important;
+        padding: 0 5px;
+        float: left;
+    }
+
+    .dropdown-list {
+        padding-top: 0.1rem !important;
+        border: 1px solid var(--border-color) !important;
+        background: var(--bg-color) !important;
+        box-shadow: 0 1px 5px var(--border-color) !important;
+
+        & li {
+            padding: 0.35rem 0.6rem !important;
+            cursor: pointer;
+        }
+    }
+
+    .multiselect-item-checkbox input[type='checkbox']:focus + div:before,
+    .multiselect-item-checkbox input[type='checkbox']:hover + div:before {
+        border-color: var(--base-color) !important;
+        background-color: var(--base-color) !important;
+    }
+
+    .multiselect-item-checkbox input[type='checkbox'] + div:before {
+        color: var(--base-color) !important;
+        border: 2px solid var(--base-color) !important;
+    }
+
+    .multiselect-item-checkbox input[type='checkbox'] + div:after {
+        background-color: var(--base-color) !important;
+    }
+    .multiselect-item-checkbox input[type='checkbox']:checked + div:before {
+        animation: borderscale 200ms ease-in;
+        background: var(--base-color) !important;
+    }
+}
+
+

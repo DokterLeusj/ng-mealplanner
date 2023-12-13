@@ -9,7 +9,7 @@
           <label [for]="dropdown.controlKey">{{dropdown.label}}</label>
         </div>
         <div *ngIf="dropdown.controlType=='text'">
-          <input [id]="dropdown.controlKey" type="text" placeholder="Search ..." [formControlName]="dropdown.controlKey">
+          <input class="search-field" [id]="dropdown.controlKey" type="text" placeholder="Search ..." [formControlName]="dropdown.controlKey">
         </div>
         <div *ngIf="dropdown.controlType=='dropdown'">
           <ng-multiselect-dropdown
