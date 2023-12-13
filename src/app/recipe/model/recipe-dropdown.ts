@@ -1,21 +1,7 @@
 import {ArrayUtility} from "../../util/array-utility";
 import {FormControl, FormGroup, isFormControl} from "@angular/forms";
 
-export class FilterRecipe {
-  // {"recipeName":[],"author":[]}
-
-//   id:number;
-//   name:string;
-//   description:string;
-//   imgUrl:string;
-//   nutriTech:boolean;
-//   author:{
-//     id:number;
-//     username:string;
-//   }
-//   ingredients:RecipeIngredientDto[];
-//   instructions:RecipeInstructionDto[]
-
+export class RecipeDropdown {
   controlKey: string;
   label: string;
   order: number;

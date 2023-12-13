@@ -4,6 +4,8 @@ import {RecipeListDto} from "../model/dto/recipe-list-dto";
 import {NgClass, NgForOf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
+import {RecipesFilter} from "../model/recipes-filter";
+import {RecipeDropdown} from "../model/recipe-dropdown";
 
 @Component({
   selector: 'app-recipes-page',
@@ -18,28 +20,23 @@ import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
   styleUrl: './recipes-page.component.css'
 })
 export class RecipesPageComponent {
-  allRecipes: Array<RecipeListDto> =[];
   displayedRecipes: Array<RecipeListDto>=[];
-  filter:object={};
+  filter:RecipesFilter={};
   isShowFilter=true;
   constructor(private recipeService:RecipeService) {
-    this.recipeService.getAllRecipes().subscribe(response =>{
-      this.allRecipes=response.filter(Boolean);
-      this.displayedRecipes=this.allRecipes;
-    })
   }
   toggleDisplayFilter():void{
     this.isShowFilter=!this.isShowFilter;
   }
-  updateFilter(filter:object):void{
-    this.filter=filter;
+  updateFilter(filter:RecipesFilter):void{
+    this.filter = { ...filter }
   }
 
-  filterRecipes(filter:object){
+  filterRecipes(filter:RecipesFilter){
     this.updateFilter(filter);
-    console.log(JSON.stringify(this.filter))
-    // this.displayedRecipes=
-      // this.allRecipes.
+    this.recipeService.getAllFilteredRecipes(filter).subscribe(response =>{
+      this.displayedRecipes=response.filter(Boolean);
+    })
   }
 
 }

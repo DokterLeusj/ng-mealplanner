@@ -2,9 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@an
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {RecipeListDto} from "../model/dto/recipe-list-dto";
-import {FilterRecipe} from "../model/filter-recipe";
+import {RecipeDropdown} from "../model/recipe-dropdown";
 import {RecipeService} from "../../recipe.service";
+import {RecipesFilter} from "../model/recipes-filter";
 
 
 @Component({
@@ -34,60 +34,63 @@ export class RecipeFilterComponent {
     allowSearchFilter: true,
     searchPlaceholderText: "Search ..."
   };
-  recipeFilterForm: FormGroup = new FormGroup("");
-  filters: FilterRecipe[] = [
-    new FilterRecipe("recipeNameControl",
+  recipeFilterForm: FormGroup = new FormGroup({
+    recipeNameControl:new FormControl(""),
+    authorControl:new FormControl([]),
+    excludedCategory:new FormControl([]),
+    dietaryNeed:new FormControl([]),
+  });
+
+  dropdownsInfo: RecipeDropdown[] = [
+    new RecipeDropdown("recipeNameControl",
       "Title contains: ",
       'text',
     ),
-    new FilterRecipe("authorControl",
+    new RecipeDropdown("authorControl",
       "Author(s)",
       'dropdown'
     ),
-    new FilterRecipe("excludedCategory",
+    new RecipeDropdown("excludedCategory",
       "Excluded category(s)",
       'dropdown'
     ),
-    new FilterRecipe("dietaryNeeds",
+    new RecipeDropdown("dietaryNeed",
       "Dietary needs",
       'dropdown'),
   ];
+  @Output()
+  filterEvent = new EventEmitter<RecipesFilter>();
 
   constructor(private recipeService: RecipeService) {
-    // this.recipeService
-    // {
-      for (let filter of this.filters) {
-        if (filter.controlKey == "authorControl") {
-          filter.setOptions([])
-          // filter.setOptions(this.allRecipes.map(r => ({
-          //   id: r.author.id,
-          //   name: r.author.username
-          // })));
-        } else if (filter.controlKey == "excludedCategory") {
-          this.recipeService.getAllFoodCategories().subscribe(response=> filter.setOptions(response))
-        } else if (filter.controlKey == "dietaryNeeds") {
-          this.recipeService.getAllDiets().subscribe(response=>   filter.setOptions(response))
-        }
+    for (let dropdown of this.dropdownsInfo) {
+      if (dropdown.controlKey == "authorControl") {
+        dropdown.setOptions([])
+        // filter.setOptions(this.allRecipes.map(r => ({
+        //   id: r.author.id,
+        //   name: r.author.username
+        // })));
+      } else if (dropdown.controlKey == "excludedCategory") {
+        this.recipeService.getAllFoodCategories().subscribe(response => dropdown.setOptions(response))
+      } else if (dropdown.controlKey == "dietaryNeeds") {
+        this.recipeService.getAllDiets().subscribe(response => dropdown.setOptions(response))
       }
-      this.recipeFilterForm = this.toFormGroup(this.filters)
+    }
 
     // }
   }
 
-  @Output()
-  filterEvent = new EventEmitter<object>();
-
-  toFormGroup(filters: FilterRecipe[]
-  ) {
-    const group: any = {};
-    filters.forEach(filter => {
-      group[filter.controlKey] = new FormControl([]);
-    });
-    return new FormGroup(group);
+  updateSendFilter() {
+    this.sendFilter(this.getRecipeFilterToRecipeFilter());
   }
 
-  updateSendFilter() {
-    this.sendFilter(this.recipeFilterForm.getRawValue());
+  getRecipeFilterToRecipeFilter(): RecipesFilter {
+    const formValues=this.recipeFilterForm.getRawValue();
+    return {
+      nameContains:formValues.recipeNameControl,
+      authorIds:formValues.authorControl,
+      excludedCategoryIds:formValues.excludedCategory,
+      dietaryNeedIds:formValues.dietaryNeed
+    };
   }
 
   getCategoryArr() {
@@ -98,19 +101,8 @@ export class RecipeFilterComponent {
     return []
   }
 
-  sendFilter(value
-               :
-               object
+  sendFilter(value: RecipesFilter
   ) {
     this.filterEvent.emit(value);
   }
-
-
-  // payLoad: string = '';
-  //
-  // onSubmit() {
-  //   this.payLoad = JSON.stringify(this.recipeFilterForm.getRawValue());
-  // }
-
-
 }

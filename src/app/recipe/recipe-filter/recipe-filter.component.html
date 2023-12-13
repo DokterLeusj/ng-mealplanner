@@ -4,20 +4,20 @@
   <form [formGroup]="recipeFilterForm">
     <div class="row d-flex justify-content-between">
       <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
-           *ngFor="let filter of filters">
+           *ngFor="let dropdown of dropdownsInfo">
         <div>
-          <label [for]="filter.controlKey">{{filter.label}}</label>
+          <label [for]="dropdown.controlKey">{{dropdown.label}}</label>
         </div>
-        <div *ngIf="filter.controlType=='text'">
-          <input [id]="filter.controlKey" type="text" placeholder="Search ..." [formControlName]="filter.controlKey">
+        <div *ngIf="dropdown.controlType=='text'">
+          <input [id]="dropdown.controlKey" type="text" placeholder="Search ..." [formControlName]="dropdown.controlKey">
         </div>
-        <div *ngIf="filter.controlType=='dropdown'">
+        <div *ngIf="dropdown.controlType=='dropdown'">
           <ng-multiselect-dropdown
-            [id]="filter.controlKey"
-            [formControlName]="filter.controlKey"
+            [id]="dropdown.controlKey"
+            [formControlName]="dropdown.controlKey"
             placeholder="Search ..."
             [settings]="dropdownSettings"
-            [data]="filter.options"
+            [data]="dropdown.options"
           ></ng-multiselect-dropdown>
         </div>
       </div>
