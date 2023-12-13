@@ -6,7 +6,7 @@
 img {
     height: 8rem;
     width: auto;
-    opacity: 10%;
+    opacity: 20%;
     filter: invert(18%) sepia(53%) saturate(1873%) hue-rotate(239deg) brightness(82%) contrast(118%);
 }
 .info-title{

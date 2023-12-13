@@ -43,11 +43,9 @@ export class RecipeService {
 
       }
     }
-    console.log(JSON.stringify(params.get("dietaryNeedIds")));
     console.log('Request URL:', this.RECIPE_FILTER_URL, '?', params.toString());
       return this.httpClient.get<Array<RecipeListDto>>(this.RECIPE_FILTER_URL, {params:params})
     }
-
 
 
   getRecipeById(id: number): Observable<any> {
