@@ -55,5 +55,3 @@ export class AuthService {
     return this.getLoggedInUser().email;
   }
 }
-
-

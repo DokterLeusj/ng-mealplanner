@@ -19,7 +19,7 @@
       </ul>
       <span class="navbar-text">
         <div *ngIf="isLoggedIn()">Hello {{getLoggedInUserUsername()}}</div>
-<!--        <button type="button" (click)="logout()" *ngIf="isLoggedIn()">Log out</button>-->
+        <button type="button" (click)="logout()" *ngIf="isLoggedIn()">Log out</button>
         <div *ngIf="!isLoggedIn()">
       <a class="navbar-brand" routerLink="/login">Sign in</a>
     </div>
