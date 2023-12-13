@@ -6,6 +6,7 @@ import {
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register-or-login',
@@ -19,7 +20,7 @@ import {AuthService} from "../auth.service";
   styleUrl: './register-or-login.component.css'
 })
 export class RegisterOrLoginComponent {
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
 
@@ -58,12 +59,16 @@ export class RegisterOrLoginComponent {
   attemptLogin() {
     if (this.credentialsForm.valid) {
       console.log(this.credentialsForm.getRawValue())
-      const email = this.credentialsForm.getRawValue().userRegisterEmail
-      const password = this.credentialsForm.getRawValue().userRegisterPassword
-      this.authService.sendLoginRequest(email, password).subscribe(response => {
-        this.authService.saveCredentialsLocally(email,password);
-
-      })
+      const email = this.credentialsForm.get('userRegisterEmail')?.value
+      const password = this.credentialsForm.get('userRegisterPassword')?.value
+     if (email && password){
+       this.authService.sendLoginRequest(email, password).subscribe(response => {
+         this.authService.saveCredentialsLocally(email,password);
+         console.log('Redirecting to homepage...')
+         this.router.navigate(['/']) // After successful login, redirect to homepage
+         console.log('Redirected')
+       })
+     }
     }
   }
 

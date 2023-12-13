@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  sendLoginRequest(email: string | null | undefined, password: string | null | undefined): Observable<any>{
+  sendLoginRequest(email: string, password: string): Observable<any>{
     return this.httpClient.post(this.AUTH_URL + '/login',
       {"email": email, "password": password})
   }
