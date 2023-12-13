@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 export class AuthService {
   private readonly BASE_API_URL: string = 'http://localhost:8080/api/v1';
   private readonly AUTH_URL: string = this.BASE_API_URL + '/auth';
+  private user: any;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,6 +24,36 @@ export class AuthService {
       "basicAuthToken": authToken
     }
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    this.user = loggedInUser
   }
 
+  logout(): void{
+    // Unset the user
+    this.user = undefined;
+    // Remove the user from local storage
+    localStorage.removeItem('logedInUser')
+  }
+
+  getLoggedInUser(){
+    const storedUser = localStorage.getItem('loggedInUser')
+    if(!storedUser){
+      throw new Error('Not logged in');
+    }
+    this.user = JSON.parse(storedUser);
+    return this.user
+  }
+
+  isLoggedIn(): boolean{
+    try {
+      this.getLoggedInUser();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  getUsername(): string{
+    return this.getLoggedInUser().email;
+  }
 }
+
+
