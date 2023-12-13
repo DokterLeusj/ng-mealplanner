@@ -1,6 +1,6 @@
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {catchError, Observable} from "rxjs";
 import {RecipeListDto} from "./recipe/model/dto/recipe-list-dto";
 import {FoodListDto} from "./recipe/model/dto/food-list-dto";
 import {DietListDto} from "./recipe/model/dto/diet-list-dto";
@@ -24,7 +24,6 @@ export class RecipeService {
 
   getAllFilteredRecipes(filter:RecipesFilter): Observable<Array<RecipeListDto>> {
       let params=new HttpParams();
-      console.log(filter)
     if (filter.nameContains!=undefined) {
       params=params.set("nameContains", filter.nameContains);
     }
@@ -41,16 +40,12 @@ export class RecipeService {
     if (filter.dietaryNeedIds) {
       for (const diet of filter.dietaryNeedIds) {
         params= params.append("dietaryNeedIds", diet.toString());
-        console.log(diet.toString());
 
       }
     }
     console.log(JSON.stringify(params.get("dietaryNeedIds")));
     console.log('Request URL:', this.RECIPE_FILTER_URL, '?', params.toString());
       return this.httpClient.get<Array<RecipeListDto>>(this.RECIPE_FILTER_URL, {params:params})
-        // .pipe(
-        //   catchError(this.handleError<Hero[]>('searchHeroes', []))
-        // );
     }
 
 

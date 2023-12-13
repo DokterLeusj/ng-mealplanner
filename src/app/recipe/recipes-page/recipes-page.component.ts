@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {RecipeCardComponent} from "../recipe-card/recipe-card.component";
 import {RecipeListDto} from "../model/dto/recipe-list-dto";
-import {NgClass, NgForOf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
 import {RecipesFilter} from "../model/recipes-filter";
 import {RecipeFilterField} from "../model/recipe-filter-field";
+import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-found.component";
 
 @Component({
   selector: 'app-recipes-page',
@@ -15,6 +16,8 @@ import {RecipeFilterField} from "../model/recipe-filter-field";
     NgForOf,
     RecipeFilterComponent,
     NgClass,
+    NgIf,
+    NoMatchesFoundComponent,
   ],
   templateUrl: './recipes-page.component.html',
   styleUrl: './recipes-page.component.css'
@@ -22,6 +25,7 @@ import {RecipeFilterField} from "../model/recipe-filter-field";
 export class RecipesPageComponent {
   displayedRecipes: Array<RecipeListDto>=[];
   filter:RecipesFilter={};
+  isFiltered:boolean=false;
   isShowFilter=true;
   constructor(private recipeService:RecipeService) {
   }
@@ -36,6 +40,7 @@ export class RecipesPageComponent {
     this.updateFilter(filter);
     this.recipeService.getAllFilteredRecipes(filter).subscribe(response =>{
       this.displayedRecipes=response.filter(Boolean);
+      this.isFiltered=true;
     })
   }
 
