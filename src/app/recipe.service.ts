@@ -16,7 +16,6 @@ export class RecipeService {
   private readonly FOOD_CATEGORY_URL: string = this.BASE_API_URL + '/food-category';
   private readonly DIET_URL: string = this.BASE_API_URL + '/diet';
 
-
   constructor(private httpClient: HttpClient) {
   }
 
