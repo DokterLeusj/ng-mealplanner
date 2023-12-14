@@ -16,9 +16,9 @@ export class UserService {
   }
 
   getAllUsers(hasRecipes?:boolean): Observable<Array<UserListDto>> {
-    const params=new HttpParams();
+    let params=new HttpParams();
     if(hasRecipes!=undefined){
-      params.set("hasRecipes",hasRecipes);
+      params=params.set("hasRecipes",hasRecipes);
     }
      return this.httpClient.get<Array<UserListDto>>(
         this.USER_URL,
