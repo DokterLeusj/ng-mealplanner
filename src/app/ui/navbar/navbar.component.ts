@@ -23,6 +23,10 @@ export class NavbarComponent {
       routerLink: '/style',
       text: 'DEV style',
     },
+    {
+      routerLink: '/meal-planner',
+      text: 'Plan',
+    }
 
   ];
 }
