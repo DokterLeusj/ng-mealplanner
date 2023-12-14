@@ -2,10 +2,10 @@ import {Component, Input} from '@angular/core';
 import {RecipeService} from "../../recipe.service";
 import {ActivatedRoute} from "@angular/router";
 import {NgForOf, NgOptimizedImage} from "@angular/common";
-import {RecipeDetailDto} from "../model/recipe-detail-dto";
-import {RecipeListDto} from "../model/recipe-list-dto";
-import {RecipeInstructionDto} from "../model/recipe-instruction-dto";
-import {RecipeIngredientDto} from "../model/recipe-ingredient-dto";
+import {RecipeDetailDto} from "../model/dto/recipe-detail-dto";
+import {RecipeListDto} from "../model/dto/recipe-list-dto";
+import {RecipeInstructionDto} from "../model/dto/recipe-instruction-dto";
+import {RecipeIngredientDto} from "../model/dto/recipe-ingredient-dto";
 
 @Component({
   selector: 'app-recipe-detail',
