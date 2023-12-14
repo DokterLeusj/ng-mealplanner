@@ -43,7 +43,7 @@ export class RecipeService {
     return params;
   }
 
-  getAllFilteredRecipes(filter: RecipesFilter): Observable<Array<RecipeListDto>> {
+  getAllRecipesBy(filter: RecipesFilter): Observable<Array<RecipeListDto>> {
     return this.httpClient.get<Array<RecipeListDto>>(
       this.RECIPE_URL,
       {params: this.getParamsRecipesFilter(filter)}
