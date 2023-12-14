@@ -1,2 +1,4 @@
-export interface DietListDto {
+export interface DietListDto{
+    id:number;
+    name:string;
 }

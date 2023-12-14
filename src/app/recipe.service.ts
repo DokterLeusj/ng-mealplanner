@@ -15,37 +15,40 @@ export class RecipeService {
   private readonly RECIPE_URL: string = this.BASE_API_URL + '/recipe';
   private readonly FOOD_CATEGORY_URL: string = this.BASE_API_URL + '/food-category';
   private readonly DIET_URL: string = this.BASE_API_URL + '/diet';
-  private readonly RECIPE_FILTER_URL: string = this.RECIPE_URL+ '/filter';
-
 
   constructor(private httpClient: HttpClient) {
   }
 
-
-  getAllFilteredRecipes(filter:RecipesFilter): Observable<Array<RecipeListDto>> {
-      let params=new HttpParams();
-    if (filter.nameContains!=undefined) {
-      params=params.set("nameContains", filter.nameContains);
+  getParamsRecipesFilter(filter: RecipesFilter): HttpParams {
+    let params = new HttpParams();
+    if (filter.nameContains != undefined) {
+      params = params.set("nameContains", filter.nameContains);
     }
     if (filter.authorIds) {
       for (const author of filter.authorIds) {
-        params=params.append("authorIds", author.toString());
+        params = params.append("authorIds", author.toString());
       }
     }
     if (filter.excludedCategoryIds) {
       for (const cat of filter.excludedCategoryIds) {
-        params=params.append("excludedCategoryIds", cat.toString());
+        params = params.append("excludedCategoryIds", cat.toString());
       }
     }
     if (filter.dietaryNeedIds) {
       for (const diet of filter.dietaryNeedIds) {
-        params= params.append("dietaryNeedIds", diet.toString());
+        params = params.append("dietaryNeedIds", diet.toString());
 
       }
     }
-    console.log('Request URL:', this.RECIPE_FILTER_URL, '?', params.toString());
-      return this.httpClient.get<Array<RecipeListDto>>(this.RECIPE_FILTER_URL, {params:params})
-    }
+    return params;
+  }
+
+  getAllRecipesBy(filter: RecipesFilter): Observable<Array<RecipeListDto>> {
+    return this.httpClient.get<Array<RecipeListDto>>(
+      this.RECIPE_URL,
+      {params: this.getParamsRecipesFilter(filter)}
+    )
+  }
 
 
   getRecipeById(id: number): Observable<any> {
