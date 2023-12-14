@@ -58,7 +58,6 @@ export class RegisterOrLoginComponent {
 
   attemptLogin() {
     if (this.credentialsForm.valid) {
-      console.log(this.credentialsForm.getRawValue())
       const email = this.credentialsForm.get('userRegisterEmail')?.value
       const password = this.credentialsForm.get('userRegisterPassword')?.value
      if (email && password){
@@ -71,6 +70,7 @@ export class RegisterOrLoginComponent {
      }
     }
   }
+
 
   showErrorCredentialsValidation(): boolean {
     return this.isButtonActionClicked && !this.isValidCredentials();

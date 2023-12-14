@@ -31,7 +31,7 @@ export class AuthService {
     // Unset the user
     this.user = undefined;
     // Remove the user from local storage
-    localStorage.removeItem('logedInUser')
+    localStorage.removeItem('loggedInUser')
   }
 
   getLoggedInUser(){
