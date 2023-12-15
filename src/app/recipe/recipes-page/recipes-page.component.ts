@@ -7,6 +7,7 @@ import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
 import {RecipesFilter} from "../model/recipes-filter";
 import {RecipeFilterField} from "../model/recipe-filter-field";
 import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-found.component";
+import {SpinnerComponent} from "../../ui/spinner/spinner.component";
 
 @Component({
   selector: 'app-recipes-page',
@@ -18,6 +19,7 @@ import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-foun
     NgClass,
     NgIf,
     NoMatchesFoundComponent,
+    SpinnerComponent,
   ],
   templateUrl: './recipes-page.component.html',
   styleUrl: './recipes-page.component.css'
@@ -28,6 +30,7 @@ export class RecipesPageComponent {
   isFiltered:boolean=false;
   isShowFilter=true;
   constructor(private recipeService:RecipeService) {
+    this.filterRecipes(this.filter);
   }
   toggleDisplayFilter():void{
     this.isShowFilter=!this.isShowFilter;
@@ -37,6 +40,7 @@ export class RecipesPageComponent {
   }
 
   filterRecipes(filter:RecipesFilter){
+    this.isFiltered=false;
     this.updateFilter(filter);
     this.recipeService.getAllRecipesBy(filter).subscribe(response =>{
       this.displayedRecipes=response.filter(Boolean);

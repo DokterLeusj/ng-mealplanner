@@ -1,12 +1,14 @@
 import {Component} from '@angular/core';
 import {NgForOf} from "@angular/common";
+import {SpinnerComponent} from "../ui/spinner/spinner.component";
 
 @Component({
   selector: 'app-test-page',
   standalone: true,
-  imports: [
-    NgForOf
-  ],
+    imports: [
+        NgForOf,
+        SpinnerComponent
+    ],
   templateUrl: './style-page.component.html',
   styleUrl: './style-page.component.css'
 })

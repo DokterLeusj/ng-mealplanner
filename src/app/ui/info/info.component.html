@@ -6,7 +6,7 @@
            {{titleText}}
 
         </div>
-        <div class="col-8">
+        <div class="col-8" *ngIf="subText.length!=0">
             <div *ngFor="let text of subText">
                 {{text}}
             </div>
