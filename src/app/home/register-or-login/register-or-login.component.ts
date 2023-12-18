@@ -63,18 +63,4 @@ export class RegisterOrLoginComponent {
       }
     }
   }
-
-
-
-
-  showErrorCredentialsValidation(): boolean {
-    return this.isButtonActionClicked && !this.isValidCredentials();
-  }
-
-
-  isValidCredentials(): boolean {
-    return false;
-    //   Can use form group validation here
-  }
-
 }
