@@ -1,0 +1,27 @@
+<button type="button" class="btn btn-default mb-1" (click)="updateSendFilter()">Find recipes</button>
+
+<div class="filter-form pt-1 p-2 mb-1" [ngClass]="isShowFilter?'':'d-none'">
+  <form [formGroup]="recipeFilterForm">
+    <div class="row d-flex justify-content-between">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+           *ngFor="let dropdown of dropdownsInfo">
+        <div>
+          <label [for]="dropdown.controlKey">{{dropdown.label}}</label>
+        </div>
+        <div *ngIf="dropdown.controlType=='text'">
+          <input class="search-field" [id]="dropdown.controlKey" type="text" placeholder="Search ..." [formControlName]="dropdown.controlKey">
+        </div>
+        <div *ngIf="dropdown.controlType=='dropdown'">
+          <ng-multiselect-dropdown
+            [id]="dropdown.controlKey"
+            [formControlName]="dropdown.controlKey"
+            placeholder="Search ..."
+            [settings]="dropdownSettings"
+            [data]="dropdown.options"
+          ></ng-multiselect-dropdown>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
