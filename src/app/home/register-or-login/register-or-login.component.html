@@ -60,6 +60,12 @@
     </button>
   </div>
 
+  <div *ngIf="isButtonActionClicked">
+    <div *ngIf="this.isActionSuccessful">
+      Welcome Someone!
+    </div>
+  </div>
+
   <div class="warning-text-form" *ngIf="isButtonActionClicked">
     <div *ngIf="this.credentialsForm.invalid">
       Please make all fields valid so there are no more error messages.
