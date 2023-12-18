@@ -18,7 +18,11 @@
         >
       </ul>
       <span class="navbar-text">
-        User name
+        <div *ngIf="isLoggedIn()">Hello {{getLoggedInUserUsername()}}</div>
+        <button type="button" (click)="logout()" *ngIf="isLoggedIn()">Log out</button>
+        <div *ngIf="!isLoggedIn()">
+      <a class="navbar-brand" routerLink="/login">Sign in</a>
+    </div>
 <!--        <img id="img-profile" src="https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato" alt="">-->
       </span>
     </div>

@@ -5,6 +5,8 @@ import {
   ReactiveFormsModule, Validators,
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
+import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register-or-login',
@@ -18,17 +20,21 @@ import {NgClass, NgIf} from "@angular/common";
   styleUrl: './register-or-login.component.css'
 })
 export class RegisterOrLoginComponent {
-   credentialsForm= new FormGroup({
-    userRegisterEmail: new FormControl("",[Validators.email,Validators.required]),
-    userRegisterPassword: new FormControl("",[Validators.required,Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
+   credentialsForm = new FormGroup({
+    userRegisterEmail: new FormControl("", [Validators.email, Validators.required]),
+    userRegisterPassword: new FormControl("", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
   });
 
   isRegisterNotLogin: boolean = true;
   showingPassword: boolean = false;
   isButtonActionClicked: boolean = false;
+  isActionSuccessful: boolean = false;
 
-    changeToggleRegisterNotLogin(): void {
-    // this.isRegisterNotLogin = !this.isRegisterNotLogin; // Login not implemented yet
+  constructor(private authService: AuthService, private router: Router) {
+  }
+
+  changeToggleRegisterNotLogin(): void {
+    this.isRegisterNotLogin = !this.isRegisterNotLogin; // Login not implemented yet
   }
 
   toggleShowingPassword(): void {
@@ -41,25 +47,20 @@ export class RegisterOrLoginComponent {
 
   runActionButtonMethods(): void {
     this.isButtonActionClicked = true;
-    this.isRegisterNotLogin ? this.attemptRegister() : this.attemptLogin();
+    if (this.credentialsForm.valid) {
+      const email: string | null = this.credentialsForm.controls.userRegisterEmail.value;
+      const password: string | null = this.credentialsForm.controls.userRegisterPassword.value;
+      if (email && password) {
+        try {
+          this.isRegisterNotLogin ? this.authService.attemptRegister(email, password) : this.authService.attemptLogin(email, password);
+          this.isActionSuccessful = true;
+        } catch (e) {
+          this.isActionSuccessful = false;
+        }
+
+        this.router.navigate(['/']) // After successful login, redirect to homepage
+
+      }
+    }
   }
-
-  attemptRegister() {
-    // if email already registered, display error message
-    // if email not registered yet, display registration successful & go to Home
-  }
-
-  attemptLogin() {
-  }
-
-  showErrorCredentialsValidation(): boolean {
-    return this.isButtonActionClicked && !this.isValidCredentials();
-  }
-
-
-  isValidCredentials(): boolean {
-    return false;
-  //   Can use form group validation here
-  }
-
 }

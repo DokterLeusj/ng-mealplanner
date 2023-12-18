@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterModule} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {CommonModule, NgForOf} from "@angular/common";
+import {AuthService} from "../../home/auth.service";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterModule, NgForOf],
+  imports: [RouterLink, RouterModule, NgForOf, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -25,4 +26,18 @@ export class NavbarComponent {
     },
 
   ];
+
+  constructor(private authService: AuthService) {
+  }
+  isLoggedIn():boolean{
+    return this.authService.isLoggedIn()
+  }
+
+  getLoggedInUserUsername(): string{
+    return this.authService.getUsername()
+  }
+
+  logout(): void{
+    return this.authService.logout()
+  }
 }
