@@ -60,8 +60,13 @@
     </button>
   </div>
 
-  <div class="warning-text-form" *ngIf="isButtonActionClicked&&this.credentialsForm.invalid">Please make all fields
-    valid so there are no more error messages.
+  <div class="warning-text-form" *ngIf="isButtonActionClicked">
+    <div *ngIf="this.credentialsForm.invalid">
+      Please make all fields valid so there are no more error messages.
+    </div>
+    <div *ngIf="!this.isActionSuccessful">
+      Could not login, please try again later.
+    </div>
   </div>
   <!--  <div class="warning-text-form" *ngIf="showErrorCredentialsValidation()">This email address is already in use.</div>-->
   <!--  Documentation on form, including submit info: https://angular.io/guide/reactive-forms-->

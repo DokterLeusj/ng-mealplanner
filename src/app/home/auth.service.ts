@@ -17,14 +17,15 @@ export class AuthService {
       {"email": email, "password": password})
   }
 
-  saveCredentialsLocally(email: string | null, password: string | null){
+  saveLoggedInUserLocally(email: string | null, password: string | null){
     const authToken: string = window.btoa(email + ':' + password);
     const loggedInUser = {
       "email": email,
       "basicAuthToken": authToken
     }
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-    this.user = loggedInUser
+    this.user = loggedInUser;
+
   }
 
   logout(): void{
@@ -53,5 +54,16 @@ export class AuthService {
   }
   getUsername(): string{
     return this.getLoggedInUser().email;
+  }
+
+  attemptLogin(email:string, password:string) {
+    this.sendLoginRequest(email, password).subscribe(response => {
+      this.saveLoggedInUserLocally(email,password);
+        })
+  }
+
+  attemptRegister(email:string, password:string) {
+    // if email already registered, display error message
+    // if email not registered yet, display registration successful & go to Home
   }
 }
