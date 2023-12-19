@@ -8,12 +8,13 @@ import {RecipeService} from "../../recipe.service";
 import {UserService} from "../../user.service";
 import {DropdownOption} from "../../util/model/dropdown-option";
 import {DropdownUtility} from "../../util/dropdown-utility";
-import {Observable} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
 import {PlanFilter} from "../model/plan-filter";
+import {LoggedInUserService} from "../../logged-in-user.service";
 
 @Component({
-  selector: 'app-plan-filter',
-  standalone: true,
+    selector: 'app-plan-filter',
+    standalone: true,
     imports: [
         NgForOf,
         NgIf,
@@ -21,17 +22,16 @@ import {PlanFilter} from "../model/plan-filter";
         ReactiveFormsModule,
         NgClass
     ],
-  templateUrl: './plan-filter.component.html',
-  styleUrl: './plan-filter.component.css'
+    templateUrl: './plan-filter.component.html',
+    styleUrl: './plan-filter.component.css'
 })
 export class PlanFilterComponent {
     @Input()
     isShowFilter!: boolean;
-
     dropdownSettings = DropdownUtility.getDropdownSettings();
     planFilterForm: FormGroup = new FormGroup({
-        mealsPerDay: new FormControl(""),
-        dietaryNeed: new FormControl([]),
+        mealsPerDay: new FormControl({value:"",disabled:true}),
+        dietaryNeed: new FormControl({value:[],disabled:true}),
     });
 
     filterFields: FilterField[] = [
@@ -50,7 +50,27 @@ export class PlanFilterComponent {
     @Output()
     filterEvent = new EventEmitter<RecipesFilter>();
 
-    constructor(private recipeService: RecipeService, private userService: UserService) {
+    constructor(private recipeService: RecipeService, private loggedInUserService: LoggedInUserService) {
+        loggedInUserService.getLoggedInUserPlanSettings()
+            .pipe(
+                catchError(e => {
+                    return of(null);
+                })
+            )
+            .subscribe(
+                response => {
+                    if (response != null) {
+                        this.planFilterForm.patchValue(
+                            {
+                                mealsPerDay: response.mealsPerDay,
+                                dietaryNeed: response.dietaryNeedIds
+                            }
+                        )
+                    }
+                }
+            );
+
+
         for (let field of this.filterFields) {
             this.populateDropdownOptions("dietaryNeed", this.recipeService.getAllDiets(), d => new DropdownOption(d.id, d.name));
         }
@@ -79,8 +99,8 @@ export class PlanFilterComponent {
     private getFormValuesToPlanFilter(): PlanFilter {
         const formValues = this.planFilterForm.getRawValue();
         return {
-            mealsPerDay:formValues.mealsPerDay,
-            dietaryNeedIds:DropdownUtility.getFormControlArrayIds(formValues.dietaryNeed)
+            mealsPerDay: formValues.mealsPerDay,
+            dietaryNeedIds: DropdownUtility.getFormControlArrayIds(formValues.dietaryNeed)
         };
     }
 

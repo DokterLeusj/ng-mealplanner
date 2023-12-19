@@ -3,7 +3,9 @@ import {AuthService} from "./auth.service";
 import {UserListDto} from "./user/model/dto/user-list-dto";
 import {UserService} from "./user.service";
 import {AuthUser} from "./user/model/auth-user";
-import {catchError, of} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {UserPlanDto} from "./user/model/dto/user-plan-dto";
 
 @Injectable({
     providedIn: 'root'
@@ -38,7 +40,14 @@ export class LoggedInUserService {
         }
         return this.loggedInUser;
     }
-
+public getLoggedInUserPlanSettings():Observable<UserPlanDto>{
+       const user:UserListDto|null=this.getLoggedInUser();
+        if(user==null){
+            throw error("No logged in user!")
+        }else{
+            return this.userService.getUserPlanSettingsById(user.id);
+        }
+}
     public logOut(): boolean {
         this.loggedInUser = null;
         this.authService.logOut();
@@ -50,7 +59,7 @@ export class LoggedInUserService {
     }
 
     private setLoggedInUserDetailsFromId(id:string) {
-        this.userService.getUserDetailById(id)
+        this.userService.getUserListById(id)
             .pipe(
                 catchError(e => {
                     console.error("Could not get user details", e);

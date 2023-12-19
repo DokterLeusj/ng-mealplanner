@@ -12,6 +12,9 @@ import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-foun
 import {RecipeCardComponent} from "../../recipe/recipe-card/recipe-card.component";
 import {SpinnerComponent} from "../../ui/spinner/spinner.component";
 import {RecipeListDto} from "../../recipe/model/dto/recipe-list-dto";
+import {MealPlanService} from "../../meal-plan.service";
+import {MealPlanDraftDto} from "../model/dto/meal-plan-draft-dto";
+import {MealPlanDayDto} from "../model/dto/meal-plan-day-dto";
 
 @Component({
     selector: 'app-mealplan-page',
@@ -32,12 +35,15 @@ import {RecipeListDto} from "../../recipe/model/dto/recipe-list-dto";
     styleUrl: './mealplan-page.component.css'
 })
 export class MealplanPageComponent {
-    // displayedDays: Array<>=[];
+    mealPlanDraft: MealPlanDraftDto | null = null;
     filter: PlanFilter = {};
-    isFiltered: boolean = false;
+    isPlanGenerated: boolean = false;
     isShowFilter = true;
+    planDays: MealPlanDayDto[] =[];
 
-    constructor(private loggedInUserService: LoggedInUserService) {
+    constructor(private loggedInUserService: LoggedInUserService, private mealPlanService: MealPlanService) {
+        this.filter;
+        this.generateMealPlan(this.filter);
     }
 
     toggleDisplayFilter(): void {
@@ -49,12 +55,17 @@ export class MealplanPageComponent {
     }
 
     generateMealPlan(filter: PlanFilter) {
-        this.isFiltered = false;
+        this.planDays=[];
+        this.isPlanGenerated = false;
         this.updateFilter(filter);
-        // this.recipeService.getAllRecipesBy(filter).subscribe(response =>{
-        //   this.displayedRecipes=response.filter(Boolean);
-        //   this.isFiltered=true;
-        // })
+        this.mealPlanService.getMealPlanDraft(this.filter)
+            .subscribe(
+                response => {
+                    this.mealPlanDraft = response;
+                    this.isPlanGenerated = true;
+                    this.planDays=response.mealPlanDays;
+                }
+            );
     }
 
     isLoggedIn(): boolean {
