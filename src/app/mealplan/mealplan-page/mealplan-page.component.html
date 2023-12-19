@@ -1,23 +1,38 @@
 <div class="container" *ngIf="isLoggedIn()">
-  <div class="row">
-    <div class="col-12">
-      <h1>My Meal Planner</h1>
-      <h2>My preferences</h2>
+    <div class="row">
+        <div class="col-12">
+            <h1>My Meal Planner</h1>
+            <h2>Preferences</h2>
+            <div>
+                <!--Filter-->
+                <button class="btn btn-toggle mb-1" (click)="toggleDisplayFilter()">
+                    {{isShowFilter ? "Close filter" : "Show filter"}}
+                    <i class="fa-solid small" [ngClass]="isShowFilter?'fa-caret-up':'fa-caret-down'"></i></button>
 
-      <div>
-          <!--                Filter-->
-          <button class="btn btn-toggle mb-1" (click)="toggleDisplayFilter()">
-              {{isShowFilter ? "Close filter" : "Show filter"}}
-              <i class="fa-solid small" [ngClass]="isShowFilter?'fa-caret-up':'fa-caret-down'"></i></button>
+                <app-plan-filter [isShowFilter]="isShowFilter"
+                                 (filterEvent)="generateMealPlan($event)"></app-plan-filter>
+            </div>
+            <h2>My Meal Plan</h2>
+            <!--Meal cards-->
+            <!--No recipes found-->
+            <div class="row" *ngIf="displayedRecipes.length==0">
+                <app-spinner *ngIf="!isFiltered" titleText="Looking For Recipes"
+                             [subText]="['Many recipes to search in ...']"></app-spinner>
 
-          <app-plan-filter [isShowFilter]="isShowFilter"
-                      (filterEvent)="generateMealPlan($event)"></app-plan-filter>
-      </div>
-      <h2>My Meal Plan</h2>
+                <div class="row" *ngIf="isFiltered">
+                    <app-no-matches-found name="recipes"></app-no-matches-found>
+                </div>
+            </div>
+
+            <!--        If recipes found after search-->
+            <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
+                <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 <div *ngIf="!isLoggedIn()">
-<app-no-access [subTextArr]="['Please log in to generate a Meal Plan.']" ></app-no-access>
+    <app-no-access [subTextArr]="['Please log in to generate a Meal Plan.']"></app-no-access>
 </div>
 

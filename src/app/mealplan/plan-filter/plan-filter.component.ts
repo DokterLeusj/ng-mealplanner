@@ -84,7 +84,7 @@ export class PlanFilterComponent {
         };
     }
 
-    private sendFilter(value: RecipesFilter
+    private sendFilter(value: PlanFilter
     ) {
         this.filterEvent.emit(value);
     }
