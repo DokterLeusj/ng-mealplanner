@@ -1,32 +1,57 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink, RouterModule} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {CommonModule, NgForOf} from "@angular/common";
+import {AuthService} from "../../auth.service";
+import {UserListDto} from "../../user/model/dto/user-list-dto";
+import {LoggedInUserService} from "../../logged-in-user.service";
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [RouterLink, RouterModule, NgForOf],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+    selector: 'app-navbar',
+    standalone: true,
+    imports: [RouterLink, RouterModule, NgForOf, CommonModule],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  navlinks: Array<any> = [
-    {
-      routerLink: '',
-      text: 'Home',
-    },
-    {
-      routerLink: '/recipes',
-      text: 'Recipes',
-    },
-    {
-      routerLink: '/style',
-      text: 'DEV style',
-    },
-    {
-      routerLink: '/meal-planner',
-      text: 'Plan',
+    navLinks: Array<any> = [
+        {
+            routerLink: '',
+            text: 'Home',
+        },
+        {
+            routerLink: '/recipes',
+            text: 'Recipes',
+        },
+        {
+            routerLink: '/style',
+            text: 'DEV style',
+        },
+        {
+            routerLink: '/meal-planner',
+            text: 'Plan',
+        }
+
+    ];
+
+    constructor(private loggedInUserService: LoggedInUserService) {
+         loggedInUserService.getLoggedInUser();
     }
 
-  ];
+    logOut(): void {
+        this.loggedInUserService.logOut();
+    }
+
+    isLoggedIn():boolean{
+        return this.loggedInUserService.isLoggedIn();
+    }
+    getUsername():string|null{
+        const loggedInUser=this.loggedInUserService.getLoggedInUser();
+        if(loggedInUser!=null){
+            return loggedInUser.username;
+        }
+        return null;
+    }
+
+
+
 }

@@ -1,0 +1,14 @@
+
+.row {
+    min-height: 40vh;
+}
+
+img {
+    height: 8rem;
+    width: auto;
+    opacity: 20%;
+}
+.info-title{
+    font-size: 2rem;
+color: var(--color-dark);
+}
