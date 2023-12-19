@@ -29,8 +29,8 @@ export class RecipeFilterComponent {
 
     dropdownSettings = DropdownUtility.getDropdownSettings();
     recipeFilterForm: FormGroup = new FormGroup({
-        mealsPerDay: new FormControl(""),
-        servingsPerMeal: new FormControl([]),
+        recipeNameControl: new FormControl(""),
+        authorControl: new FormControl([]),
         excludedCategory: new FormControl([]),
         dietaryNeed: new FormControl([]),
     });
@@ -61,11 +61,9 @@ export class RecipeFilterComponent {
     filterEvent = new EventEmitter<RecipesFilter>();
 
     constructor(private recipeService: RecipeService, private userService: UserService) {
-        for (let field of this.filterFields) {
             this.populateDropdownOptions("authorControl", this.userService.getAllUsers(true), u => new DropdownOption(u.id, u.username));
             this.populateDropdownOptions("excludedCategory", this.recipeService.getAllFoodCategories(), f => new DropdownOption(f.id, f.name));
             this.populateDropdownOptions("dietaryNeed", this.recipeService.getAllDiets(), d => new DropdownOption(d.id, d.name));
-        }
     }
 
     private populateDropdownOptions(
@@ -90,8 +88,8 @@ export class RecipeFilterComponent {
     private getRecipeFilterToRecipeFilter(): RecipesFilter {
         const formValues = this.recipeFilterForm.getRawValue();
         return {
-            nameContains: formValues.mealsPerDay,
-            authorIds: DropdownUtility.getFormControlArrayIds(formValues.servingsPerMeal),
+            nameContains: formValues.nameContains,
+            authorIds: DropdownUtility.getFormControlArrayIds(formValues.authorControl),
             excludedCategoryIds: DropdownUtility.getFormControlArrayIds(formValues.excludedCategory),
             dietaryNeedIds: DropdownUtility.getFormControlArrayIds(formValues.dietaryNeed)
         };

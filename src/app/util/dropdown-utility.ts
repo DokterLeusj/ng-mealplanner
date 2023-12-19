@@ -1,5 +1,3 @@
-import {map, Observable} from "rxjs";
-import {DropdownOption} from "./model/dropdown-option";
 
 export class DropdownUtility {
     static uniqueIdFilterObject(valueContainingId:any, index:number, array:any[]) {
@@ -18,7 +16,11 @@ export class DropdownUtility {
             searchPlaceholderText: "Search ..."
         };
     }
-    static getFormControlArrayIds(objArr: any[]): number[] {
-        return objArr.map(o => o.id);
+    static getFormControlArrayIds(objArr: any[]): number[]|undefined {
+        if(objArr.length>0){
+            return objArr.map(o => o.id);
+        }else{
+            return undefined;
+        }
     }
 }
