@@ -7,6 +7,7 @@ import {RecipeService} from "../../recipe.service";
 import {NgClass, NgIf} from "@angular/common";
 import {LoggedInUserService} from "../../logged-in-user.service";
 import {InfoComponent} from "../../ui/info/info.component";
+import {NoAccessComponent} from "../../ui/no-access/no-access.component";
 
 @Component({
   selector: 'app-mealplan-page',
@@ -16,7 +17,8 @@ import {InfoComponent} from "../../ui/info/info.component";
     RecipeFilterComponent,
     NgClass,
     NgIf,
-    InfoComponent
+    InfoComponent,
+    NoAccessComponent
   ],
   templateUrl: './mealplan-page.component.html',
   styleUrl: './mealplan-page.component.css'
