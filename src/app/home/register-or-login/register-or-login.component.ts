@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule, Validators,
 } from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
-import {AuthService} from "../auth.service";
+import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -20,15 +20,14 @@ import {Router} from "@angular/router";
   styleUrl: './register-or-login.component.css'
 })
 export class RegisterOrLoginComponent {
-   credentialsForm = new FormGroup({
-    userRegisterEmail: new FormControl("", [Validators.email, Validators.required]),
-    userRegisterPassword: new FormControl("", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
-  });
-
-  isRegisterNotLogin: boolean = true;
+  isRegisterNotLogin: boolean = false;
   showingPassword: boolean = false;
   isButtonActionClicked: boolean = false;
   isActionSuccessful: boolean = false;
+  credentialsForm = new FormGroup({
+    userRegisterEmail: new FormControl("", [Validators.email, Validators.required]),
+    userRegisterPassword: new FormControl("", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
+  });
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -46,21 +45,24 @@ export class RegisterOrLoginComponent {
   }
 
   runActionButtonMethods(): void {
+    this.isActionSuccessful = false;
     this.isButtonActionClicked = true;
     if (this.credentialsForm.valid) {
       const email: string | null = this.credentialsForm.controls.userRegisterEmail.value;
       const password: string | null = this.credentialsForm.controls.userRegisterPassword.value;
       if (email && password) {
-        try {
-          this.isRegisterNotLogin ? this.authService.attemptRegister(email, password) : this.authService.attemptLogin(email, password);
-          this.isActionSuccessful = true;
-        } catch (e) {
-          this.isActionSuccessful = false;
-        }
-
-        this.router.navigate(['/']) // After successful login, redirect to homepage
-
+        this.isActionSuccessful = this.runAction(email, password);
       }
+    }
+  }
+
+  runAction(email: string, password: string): boolean {
+    try {
+      return this.isRegisterNotLogin ?
+          this.authService.attemptRegister(email, password) :
+          this.authService.attemptLogin(email, password);
+    } catch (e) {
+      return false;
     }
   }
 }

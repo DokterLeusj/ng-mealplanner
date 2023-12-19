@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RegisterOrLoginComponent} from "../register-or-login/register-or-login.component";
 import {HeroSectionHomeComponent} from "../hero-section-home/hero-section-home.component";
-import {AuthService} from "../auth.service";
+import {AuthService} from "../../auth.service";
 import {CommonModule, NgIf} from "@angular/common";
 
 @Component({

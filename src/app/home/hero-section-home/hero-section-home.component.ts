@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RegisterOrLoginComponent} from "../register-or-login/register-or-login.component";
 import {AppComponent} from "../../app.component";
 import {NgIf} from "@angular/common";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-hero-section-home',
@@ -14,6 +15,9 @@ import {NgIf} from "@angular/common";
   styleUrl: './hero-section-home.component.css'
 })
 export class HeroSectionHomeComponent {
-  loggedInUser:any= AppComponent.loggedInUser;
+  loggedInUser: any;
 
+  constructor(private authService: AuthService) {
+    this.loggedInUser = authService.getLoggedInUser();
+  }
 }

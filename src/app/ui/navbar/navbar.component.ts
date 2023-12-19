@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterModule} from "@angular/router";
 import {CommonModule, NgForOf} from "@angular/common";
-import {AuthService} from "../../home/auth.service";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -42,6 +42,6 @@ export class NavbarComponent {
   }
 
   logout(): void{
-    return this.authService.logout()
+    return this.authService.logOut()
   }
 }
