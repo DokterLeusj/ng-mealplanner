@@ -1,1 +1,8 @@
-<p>plan-day-card works!</p>
+<div class="col card-container">
+    <div class="card h-100">
+        <h3>Day {{planDay.dayNumber}}</h3>
+        <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
+            <app-recipe-card *ngFor="let recipe of planDay.recipes" [recipe]="recipe"></app-recipe-card>
+        </div>
+    </div>
+</div>

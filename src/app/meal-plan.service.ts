@@ -18,20 +18,18 @@ export class MealPlanService {
     }
 
     public getMealPlanDraft(filter: PlanFilter): Observable<MealPlanDraftDto> {
-        const params = this.getParamsPlanFilter(filter);
+        console.log(JSON.stringify(this.getParamsPlanFilter(filter)))
+
         return this.httpClient.get<MealPlanDraftDto>(
-            this.DRAFT_URL,
-            {
-                params: params
-            })
+            this.DRAFT_URL,{params: this.getParamsPlanFilter(filter)});
     }
     private getParamsPlanFilter(filter: PlanFilter): HttpParams {
         let params = new HttpParams();
         if(filter.mealsPerDay){
             params=params.append("mealsPerDay",filter.mealsPerDay);
         }
-        if (filter.dietaryNeedIds) {
-            for (const id of filter.dietaryNeedIds) {
+        if (filter.dietaryNeeds) {
+            for (const id of filter.dietaryNeeds) {
                 params = params.append("dietaryNeedIds", id.toString());
             }
         }

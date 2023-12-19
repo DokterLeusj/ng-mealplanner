@@ -1,4 +1,4 @@
 export interface PlanFilter {
     mealsPerDay?: number;
-    dietaryNeedIds?: number[];
+    dietaryNeeds?: { id:number,name:string }[]|null;
 }

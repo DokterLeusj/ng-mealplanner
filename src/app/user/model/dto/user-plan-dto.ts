@@ -1,6 +1,6 @@
 export interface UserPlanDto {
     id:number,
-    dietaryNeedIds:number[],
+    dietaryNeeds: { id:number,name:string }[],
     mealsPerDay:number
 }
 

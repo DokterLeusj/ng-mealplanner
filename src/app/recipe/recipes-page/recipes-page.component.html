@@ -10,6 +10,9 @@
                 <app-recipe-filter [isShowFilter]="isShowFilter"
                                    (filterEvent)="filterRecipes($event)"></app-recipe-filter>
                 <!--Recipe cards-->
+                <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
+                    <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>
+                </div>
                 <!--No recipes found-->
                 <div class="row" *ngIf="displayedRecipes.length==0">
                     <app-spinner *ngIf="!isFiltered" titleText="Looking For Recipes"
@@ -20,10 +23,6 @@
                     </div>
                 </div>
 
-                <!--        If recipes found after search-->
-                <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
-                    <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>
-                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ import {RecipeListDto} from "../../recipe/model/dto/recipe-list-dto";
 import {MealPlanService} from "../../meal-plan.service";
 import {MealPlanDraftDto} from "../model/dto/meal-plan-draft-dto";
 import {MealPlanDayDto} from "../model/dto/meal-plan-day-dto";
+import {PlanDayCardComponent} from "../plan-day-card/plan-day-card.component";
 
 @Component({
     selector: 'app-mealplan-page',
@@ -29,7 +30,8 @@ import {MealPlanDayDto} from "../model/dto/meal-plan-day-dto";
         NgForOf,
         NoMatchesFoundComponent,
         RecipeCardComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        PlanDayCardComponent
     ],
     templateUrl: './mealplan-page.component.html',
     styleUrl: './mealplan-page.component.css'
@@ -42,8 +44,6 @@ export class MealplanPageComponent {
     planDays: MealPlanDayDto[] =[];
 
     constructor(private loggedInUserService: LoggedInUserService, private mealPlanService: MealPlanService) {
-        this.filter;
-        this.generateMealPlan(this.filter);
     }
 
     toggleDisplayFilter(): void {
@@ -63,7 +63,8 @@ export class MealplanPageComponent {
                 response => {
                     this.mealPlanDraft = response;
                     this.isPlanGenerated = true;
-                    this.planDays=response.mealPlanDays;
+                    this.planDays=this.mealPlanDraft.mealPlanDays
+                        .sort((a:MealPlanDayDto,b:MealPlanDayDto)=>(a.dayNumber-b.dayNumber))
                 }
             );
     }

@@ -13,9 +13,13 @@
                                  (filterEvent)="generateMealPlan($event)"></app-plan-filter>
             </div>
             <h2>My Meal Plan</h2>
-            <!--Meal cards-->
+            <!--            Meal cards-->
+            <div class="row row-cols-1 g-4">
+                <app-plan-day-card *ngFor="let day of planDays" [planDay]="day"></app-plan-day-card>
+            </div>
+
             <!--No recipes found-->
-            <div class="row" *ngIf="planDays.length==0">
+            <div class="row" *ngIf="mealPlanDraft==null">
                 <app-spinner *ngIf="!isPlanGenerated" titleText="Generating Meal Plan"
                              [subText]="['Creating a good fit ...']"></app-spinner>
 
@@ -24,10 +28,6 @@
                 </div>
             </div>
 
-<!--            &lt;!&ndash;        If recipes found after search&ndash;&gt;-->
-<!--            <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">-->
-<!--                <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>-->
-<!--            </div>-->
 
         </div>
     </div>
