@@ -1,16 +1,23 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn()">
   <div class="row">
     <div class="col-12">
       <h1>My Meal Planner</h1>
       <h2>My preferences</h2>
 
       <div>
-        <button class="btn btn-default">
-        Generate !
-        </button>
+          <!--                Filter-->
+          <button class="btn btn-toggle mb-1" (click)="toggleDisplayFilter()">
+              {{isShowFilter ? "Close filter" : "Show filter"}}
+              <i class="fa-solid small" [ngClass]="isShowFilter?'fa-caret-up':'fa-caret-down'"></i></button>
+
+          <app-plan-filter [isShowFilter]="isShowFilter"
+                      (filterEvent)="generateMealPlan($event)"></app-plan-filter>
       </div>
       <h2>My Meal Plan</h2>
     </div>
   </div>
+</div>
+<div *ngIf="!isLoggedIn()">
+
 </div>
 

@@ -11,5 +11,6 @@ export const routes: Routes = [
   {path:"style", component:StylePageComponent},
   {path:"recipes", component:RecipesPageComponent},
   {path:"recipes/:id", component:RecipeDetailComponent},
+//   TODO: make mealplanner page not accessible unless logged in
   {path:"meal-planner", component:MealplanPageComponent}
 ];

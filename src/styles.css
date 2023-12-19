@@ -51,6 +51,10 @@ h5 { /*  Used for card titles*/
     font-size: small;
 }
 
+.filter-form{
+    background-color: var(--color-bright);
+    border-radius: 0.5rem;
+}
 
 .btn {
     --bs-btn-font-size: 1rem;
