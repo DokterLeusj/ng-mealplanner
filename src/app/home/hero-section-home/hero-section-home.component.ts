@@ -17,16 +17,15 @@ import {UserListDto} from "../../user/model/dto/user-list-dto";
   styleUrl: './hero-section-home.component.css'
 })
 export class HeroSectionHomeComponent {
-  loggedInUser:UserListDto|null=null;
+
   constructor(private loggedInUserService: LoggedInUserService){
-    this.loggedInUser=this.loggedInUserService.getLoggedInUser();
   }
   isLoggedIn() {
-    return this.loggedInUserService.isLoggedIn()
+    return this.loggedInUserService.isLoggedIn();
   }
 
   getUsername(): string |undefined{
-    return this.loggedInUser?.username;
+    return this.loggedInUserService.getLoggedInUser()?.username;
   }
 
 }
