@@ -3,7 +3,7 @@ import {RegisterOrLoginComponent} from "../register-or-login/register-or-login.c
 import {AppComponent} from "../../app.component";
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../auth.service";
-import {LoggedInUserService} from "../../../logged-in-user.service";
+import {LoggedInUserService} from "../../logged-in-user.service";
 import {UserListDto} from "../../user/model/dto/user-list-dto";
 
 @Component({

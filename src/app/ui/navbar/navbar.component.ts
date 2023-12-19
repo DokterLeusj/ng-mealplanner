@@ -3,7 +3,7 @@ import {RouterLink, RouterModule} from "@angular/router";
 import {CommonModule, NgForOf} from "@angular/common";
 import {AuthService} from "../../auth.service";
 import {UserListDto} from "../../user/model/dto/user-list-dto";
-import {LoggedInUserService} from "../../../logged-in-user.service";
+import {LoggedInUserService} from "../../logged-in-user.service";
 
 @Component({
     selector: 'app-navbar',

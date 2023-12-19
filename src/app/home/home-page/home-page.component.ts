@@ -4,7 +4,7 @@ import {HeroSectionHomeComponent} from "../hero-section-home/hero-section-home.c
 import {AuthService} from "../../auth.service";
 import {CommonModule, NgIf} from "@angular/common";
 import {UserService} from "../../user.service";
-import {LoggedInUserService} from "../../../logged-in-user.service";
+import {LoggedInUserService} from "../../logged-in-user.service";
 import {UserListDto} from "../../user/model/dto/user-list-dto";
 
 @Component({

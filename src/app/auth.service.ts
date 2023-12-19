@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
 import {AuthUser} from "./user/model/auth-user";
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AuthService {
         if (this.loggedInAuthUser == null) {
             try {
                 this.loggedInAuthUser = this.getLoggedInAuthUserFromLocalStorage();
-            }catch (e) {
+            } catch (e) {
                 throw e;
             }
         }
@@ -30,17 +30,19 @@ export class AuthService {
         localStorage.removeItem('loggedInAuthUser');
     }
 
-    public attemptLogin(email: string, password: string): boolean {
-        try {
-            this.sendLoginRequest(email, password)
-                .subscribe(
-                    response => {
-                        this.setLoggedInAuthUserInLocalStorage(response.id, email, password);
-                    });
-            return true;
-        } catch (error) {
-            return false;
-        }
+    public attemptLogin(email: string, password: string) {
+        this.sendLoginRequest(email, password)
+            .pipe(
+                catchError(e => {
+                    console.error("Invalid credentials", e);
+                    throw e;
+                })
+            )
+            .subscribe(
+                response => {
+                    this.setLoggedInAuthUserInLocalStorage(response.id, email, password);
+                });
+
     }
 
     public attemptRegister(email: string, password: string): boolean {
@@ -71,11 +73,7 @@ export class AuthService {
     }
 
     private sendLoginRequest(email: string, password: string): Observable<any> {
-        return this.httpClient.post(this.AUTH_URL + '/login',
-            {"email": email, "password": password})
-            .pipe(catchError((error: HttpErrorResponse) => {
-                    throw error;
-                })
-            );
+        return this.httpClient.post(this.AUTH_URL + '/login', {"email": email, "password": password});
+
     }
 }

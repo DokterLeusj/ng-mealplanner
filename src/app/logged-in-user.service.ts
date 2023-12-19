@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "./app/auth.service";
-import {UserListDto} from "./app/user/model/dto/user-list-dto";
-import {UserService} from "./app/user.service";
-import {AuthUser} from "./app/user/model/auth-user";
+import {AuthService} from "./auth.service";
+import {UserListDto} from "./user/model/dto/user-list-dto";
+import {UserService} from "./user.service";
+import {AuthUser} from "./user/model/auth-user";
 import {catchError, of} from "rxjs";
 
 @Injectable({
@@ -25,6 +25,9 @@ export class LoggedInUserService {
     }
 
     public getLoggedInUser(): UserListDto | null {
+        if(this.loggedInAuthUser==null){
+          this.loggedInAuthUser=this.authService.getLoggedInAuthUser();
+        }
         if(this.loggedInAuthUser!=null&&this.loggedInUser==null){
             this.setLoggedInUserDetailsFromId(this.loggedInAuthUser.id);
         }
