@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {catchError, Observable, of} from "rxjs";
+import {catchError, map, Observable, of} from "rxjs";
 import {AuthUser} from "./user/model/auth-user";
 
 @Injectable({
@@ -30,20 +30,34 @@ export class AuthService {
         localStorage.removeItem('loggedInAuthUser');
     }
 
-    public attemptLogin(email: string, password: string) {
-        this.sendLoginRequest(email, password)
+    public attemptLogin(email: string, password: string):Observable<any> {
+       return this.sendLoginRequest(email, password)
             .pipe(
+                map(response => {
+                    this.setLoggedInAuthUserInLocalStorage(response.id, email, password);
+                    return response;
+                })
+                ,
                 catchError(e => {
                     console.error("Invalid credentials", e);
                     throw e;
                 })
             )
-            .subscribe(
-                response => {
-                    this.setLoggedInAuthUserInLocalStorage(response.id, email, password);
-                });
-
     }
+    // public attemptLogin(email: string, password: string) {
+    //     this.sendLoginRequest(email, password)
+    //         .pipe(
+    //             catchError(e => {
+    //                 console.error("Invalid credentials", e);
+    //                 throw e;
+    //             })
+    //         )
+    //         .subscribe(
+    //             response => {
+    //                 this.setLoggedInAuthUserInLocalStorage(response.id, email, password);
+    //             });
+    //
+    // }
 
     public attemptRegister(email: string, password: string): boolean {
         return false;

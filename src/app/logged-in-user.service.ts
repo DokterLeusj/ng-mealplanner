@@ -26,7 +26,11 @@ export class LoggedInUserService {
 
     public getLoggedInUser(): UserListDto | null {
         if(this.loggedInAuthUser==null){
-          this.loggedInAuthUser=this.authService.getLoggedInAuthUser();
+            try{
+                this.loggedInAuthUser=this.authService.getLoggedInAuthUser();
+            }catch (e) {
+                return null;
+            }
         }
              if(!this.loggedInAuthUser===null&&this.loggedInUser==null){
 

@@ -9,6 +9,7 @@ import {AuthService} from "../../auth.service";
 import {Router} from "@angular/router";
 import {UserService} from "../../user.service";
 import {LoggedInUserService} from "../../logged-in-user.service";
+import {readSpanComment} from "@angular/compiler-cli/src/ngtsc/typecheck/src/comments";
 
 @Component({
     selector: 'app-register-or-login',
@@ -31,7 +32,7 @@ export class RegisterOrLoginComponent {
         userRegisterPassword: new FormControl("Someone1", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
     });
 
-    constructor(private authService: AuthService, private router: Router, private loggedInUserService:LoggedInUserService) {
+    constructor(private authService: AuthService, private router: Router, private loggedInUserService: LoggedInUserService) {
     }
 
     changeToggleRegisterNotLogin(): void {
@@ -54,16 +55,24 @@ export class RegisterOrLoginComponent {
             const password: string | null = this.credentialsForm.controls.userRegisterPassword.value;
             if (email && password) {
                 this.runAction(email, password);
-                if(!this.isRegisterNotLogin){
-                    this.isActionSuccessful =this.loggedInUserService.isLoggedIn();
-                }
             }
         }
     }
-    runAction(email: string, password: string) {
-        this.isRegisterNotLogin ?
-            this.authService.attemptRegister(email, password) :
-            this.authService.attemptLogin(email, password);
 
+    runAction(email: string, password: string) {
+        try {
+            if (this.isRegisterNotLogin) {
+                this.authService.attemptRegister(email, password);
+            } else {
+                this.authService.attemptLogin(email, password).subscribe(
+                    response=>{
+                        // Todo: update isactionsuccessful correct :(
+                        this.isActionSuccessful = this.loggedInUserService.isLoggedIn();
+                    }
+                );
+            }
+        } catch (e) {
+            console.error("Could not execute action", e)
+        }
     }
 }
