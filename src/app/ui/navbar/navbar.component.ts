@@ -32,23 +32,26 @@ export class NavbarComponent {
         }
 
     ];
-    loggedInUser: UserListDto | null;
 
     constructor(private loggedInUserService: LoggedInUserService) {
-        this.loggedInUser = loggedInUserService.getLoggedInUser();
+         loggedInUserService.getLoggedInUser();
     }
 
     logOut(): void {
         this.loggedInUserService.logOut();
-        this.removeLoggedInUser();
     }
 
     isLoggedIn():boolean{
-        return this.loggedInUser!=null;
+        return this.loggedInUserService.isLoggedIn();
+    }
+    getUsername():string|null{
+        const loggedInUser=this.loggedInUserService.getLoggedInUser();
+        if(loggedInUser!=null){
+            return loggedInUser.username;
+        }
+        return null;
     }
 
-    private removeLoggedInUser() {
-        this.loggedInUser = null;
-    }
+
 
 }

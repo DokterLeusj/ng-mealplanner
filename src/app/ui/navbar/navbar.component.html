@@ -20,7 +20,7 @@
             </ul>
             <span class="navbar-text">
         <div *ngIf="isLoggedIn()">
-            {{loggedInUser?.username}}
+            {{getUsername()}}
             <button class="btn btn-default" (click)="logOut()" type="button">
              Log out
          </button>
