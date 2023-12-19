@@ -55,14 +55,11 @@ export class RegisterOrLoginComponent {
             if (email && password) {
                 this.runAction(email, password);
                 if(!this.isRegisterNotLogin){
-                    // todo: isLoggedIn function doesn't return true upon succesful login
                     this.isActionSuccessful =this.loggedInUserService.isLoggedIn();
                 }
             }
         }
     }
-
-
     runAction(email: string, password: string) {
         this.isRegisterNotLogin ?
             this.authService.attemptRegister(email, password) :

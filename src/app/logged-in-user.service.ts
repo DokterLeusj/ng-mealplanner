@@ -28,7 +28,8 @@ export class LoggedInUserService {
         if(this.loggedInAuthUser==null){
           this.loggedInAuthUser=this.authService.getLoggedInAuthUser();
         }
-        if(this.loggedInAuthUser!=null&&this.loggedInUser==null){
+             if(!this.loggedInAuthUser===null&&this.loggedInUser==null){
+
             this.setLoggedInUserDetailsFromId(this.loggedInAuthUser.id);
         }
         return this.loggedInUser;
@@ -41,7 +42,7 @@ export class LoggedInUserService {
     }
 
     public isLoggedIn(): boolean {
-        return !this.getLoggedInUser()== null;
+        return this.getLoggedInUser()!= null;
     }
 
     private setLoggedInUserDetailsFromId(id:string) {
