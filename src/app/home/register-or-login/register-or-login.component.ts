@@ -66,7 +66,7 @@ export class RegisterOrLoginComponent {
             } else {
                 this.authService.attemptLogin(email, password).subscribe(
                     response=>{
-                        // Todo: update isactionsuccessful correct :(
+                        // Todo: update isactionsuccessful when login is finished
                         this.isActionSuccessful = this.loggedInUserService.isLoggedIn();
                         window.location.reload();
                     }
