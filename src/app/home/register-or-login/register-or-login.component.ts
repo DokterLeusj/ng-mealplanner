@@ -68,6 +68,7 @@ export class RegisterOrLoginComponent {
                     response=>{
                         // Todo: update isactionsuccessful correct :(
                         this.isActionSuccessful = this.loggedInUserService.isLoggedIn();
+                        window.location.reload();
                     }
                 );
             }
