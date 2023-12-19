@@ -1,31 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-  <div class="container-fluid">
+    <div class="container-fluid">
 
-    <a class="navbar-brand" href="#">mealplan.</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<!--        navbar content-->
-        <a
-          *ngFor="let navlink of navlinks"
-          class="nav-link"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="{{ navlink.routerLink }}"
-        >{{ navlink.text }}</a
-        >
-      </ul>
-      <span class="navbar-text">
-        <div *ngIf="isLoggedIn()">Hello {{getLoggedInUserUsername()}}</div>
-        <button type="button" (click)="logout()" *ngIf="isLoggedIn()">Log out</button>
+        <a class="navbar-brand" href="#">mealplan.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!--        navbar content-->
+                <a
+                        *ngFor="let navlink of navLinks"
+                        class="nav-link"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        routerLink="{{ navlink.routerLink }}"
+                >{{ navlink.text }}</a
+                >
+            </ul>
+            <span class="navbar-text">
+        <div *ngIf="isLoggedIn()">
+            {{getUsername()}}
+            <button class="btn btn-default" (click)="logOut()" type="button">
+             Log out
+         </button>
+        </div>
+
         <div *ngIf="!isLoggedIn()">
       <a class="navbar-brand" routerLink="/login">Sign in</a>
     </div>
-<!--        <img id="img-profile" src="https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato" alt="">-->
+                <!--        <img id="img-profile" src="https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato" alt="">-->
       </span>
+        </div>
     </div>
-  </div>
 
 </nav>

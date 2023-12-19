@@ -1,79 +1,77 @@
 <div class="container-fluid" id="user-form">
+    <h6>{{ isRegisterNotLogin ? 'Register' : 'Log in' }}
+    </h6>
+    <!--  Input-->
+    <!--Email form-->
+    <form [formGroup]="credentialsForm">
+        <div>
+            <label for="userEmail">E-mail address </label>
+        </div>
+        <div>
+            <input id="userEmail" type="email" formControlName="userRegisterEmail">
+        </div>
+        <!--  Email validation messages-->
+        <div class="warning-text-form"
+             *ngIf="credentialsForm.controls.userRegisterEmail.invalid && (credentialsForm.controls.userRegisterEmail?.touched||isButtonActionClicked)">
+            <div *ngIf="credentialsForm.controls.userRegisterEmail?.errors?.['required']">This field is required.</div>
+            <div *ngIf="credentialsForm.controls.userRegisterEmail?.errors?.['email']">Please enter a valid email
+                address.
+            </div>
+        </div>
 
-  <h6>{{ isRegisterNotLogin ? 'Register' : 'Log in' }}
-  </h6>
-
-  <!--  Input-->
-  <!--Email form-->
-  <form [formGroup]="credentialsForm">
-    <div>
-      <label for="userEmail">E-mail address </label>
-    </div>
-    <div>
-      <input id="userEmail" type="email" formControlName="userRegisterEmail">
-    </div>
-    <!--  Email validation messages-->
-    <div class="warning-text-form"
-         *ngIf="credentialsForm.get('userRegisterEmail')?.invalid && (credentialsForm.get('userRegisterEmail')?.touched||isButtonActionClicked)">
-      <div *ngIf="credentialsForm.get('userRegisterEmail')?.errors?.['required']">This field is required.</div>
-      <div *ngIf="credentialsForm.get('userRegisterEmail')?.errors?.['email']">Please enter a valid email address.</div>
-    </div>
-
-    <!--Password form-->
-    <div>
-      <label for="userPassword">Password <span (click)="toggleShowingPassword()">
+        <!--Password form-->
+        <div>
+            <label for="userPassword">Password <span (click)="toggleShowingPassword()">
       <i class='fa-regular' [ngClass]="showingPassword?'fa-eye-slash small':'fa-eye small'"
          [title]="showingPassword?'Show password.':'Hide password'"></i>
     </span></label>
-    </div>
-    <div>
-      <input id="userPassword" [type]="getPasswordType()" formControlName="userRegisterPassword">
-    </div>
-    <!--  Password validation messages-->
-    <div class="warning-text-form"
-         *ngIf="credentialsForm.get('userRegisterPassword')?.invalid && (credentialsForm.get('userRegisterPassword')?.touched||isButtonActionClicked)">
-      <div *ngIf="credentialsForm.get('userRegisterPassword')?.errors?.['required']">This field is required.</div>
-      <div *ngIf="credentialsForm.get('userRegisterPassword')?.errors?.['pattern']">
-        A password must be
-        <ul>
-          <li>At least 8 characters long</li>
-          <li>Contain at least 1 uppercase and 1 lowercase letter</li>
-          <li>Contain at least 1 number</li>
-        </ul>
-      </div>
-    </div>
-  </form>
+        </div>
+        <div>
+            <input id="userPassword" [type]="getPasswordType()" formControlName="userRegisterPassword">
+        </div>
+        <!--  Password validation messages-->
+        <div class="warning-text-form"
+             *ngIf="credentialsForm.controls.userRegisterPassword?.invalid && (credentialsForm.get('userRegisterPassword')?.touched||isButtonActionClicked)">
+            <div *ngIf="credentialsForm.controls.userRegisterPassword?.errors?.['required']">This field is required.
+            </div>
+            <div *ngIf="credentialsForm.controls.userRegisterPassword?.errors?.['pattern']">
+                A password must be
+                <ul>
+                    <li>At least 8 characters long</li>
+                    <li>Contain at least 1 uppercase and 1 lowercase letter</li>
+                    <li>Contain at least 1 number</li>
+                </ul>
+            </div>
+        </div>
+    </form>
 
-  <!--  Toggle register/login (login not implemented yet)-->
-  <div>
-    <a class="small" (click)="changeToggleRegisterNotLogin()">
-      {{ isRegisterNotLogin ? 'Already a user? Click here to log in.' : 'Not a user yet? Click here to register.' }}
-    </a>
-  </div>
+    <!--  Toggle register/login (login not implemented yet)-->
+    <!--  <div>-->
+    <!--    <a class="small" (click)="changeToggleRegisterNotLogin()">-->
+    <!--      {{ isRegisterNotLogin ? 'Already a user? Click here to log in.' : 'Not a user yet? Click here to register.' }}-->
+    <!--    </a>-->
+    <!--  </div>-->
 
-  <!--  Button-->
-  <div class="py-2">
-    <button class="btn btn-default"
-            (click)="runActionButtonMethods()"
-            title="Click to continue.">
-      {{ isRegisterNotLogin ? 'Register' : 'Log in' }}
-    </button>
-  </div>
+    <!--  Button-->
+    <div class="py-2">
+        <button class="btn btn-default"
+                (click)="runActionButtonMethods()"
+                title="Click to continue.">
+            {{ isRegisterNotLogin ? 'Register' : 'Log in' }}
+        </button>
+    </div>
 
-  <div *ngIf="isButtonActionClicked">
-    <div *ngIf="this.isActionSuccessful">
-      Welcome Someone!
+    <div *ngIf="isButtonActionClicked">
+        <div class="warning-text-form">
+            <div *ngIf="this.credentialsForm.invalid">
+                Please make all fields valid so there are no more error messages.
+            </div>
+            <div *ngIf="!this.isActionSuccessful">
+                Could not find user with these credentials. Please try again with valid credentials.
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="warning-text-form" *ngIf="isButtonActionClicked">
-    <div *ngIf="this.credentialsForm.invalid">
-      Please make all fields valid so there are no more error messages.
-    </div>
-    <div *ngIf="!this.isActionSuccessful">
-      Could not login, please try again later.
-    </div>
-  </div>
-  <!--  <div class="warning-text-form" *ngIf="showErrorCredentialsValidation()">This email address is already in use.</div>-->
-  <!--  Documentation on form, including submit info: https://angular.io/guide/reactive-forms-->
+    <!--  <div class="warning-text-form" *ngIf="showErrorCredentialsValidation()">This email address is already in use.</div>-->
+    <!--  Documentation on form, including submit info: https://angular.io/guide/reactive-forms-->
 </div>
