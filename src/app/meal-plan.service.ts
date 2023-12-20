@@ -18,8 +18,6 @@ export class MealPlanService {
     }
 
     public getMealPlanDraft(filter: PlanFilter): Observable<MealPlanDraftDto> {
-        console.log(JSON.stringify(this.getParamsPlanFilter(filter)))
-
         return this.httpClient.get<MealPlanDraftDto>(
             this.DRAFT_URL,{params: this.getParamsPlanFilter(filter)});
     }

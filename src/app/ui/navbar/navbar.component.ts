@@ -22,10 +22,10 @@ export class NavbarComponent {
             routerLink: '/recipes',
             text: 'Recipes',
         },
-        {
-            routerLink: '/style',
-            text: 'DEV style',
-        },
+        // {
+        //     routerLink: '/style',
+        //     text: 'DEV style',
+        // },
         {
             routerLink: '/meal-planner',
             text: 'My Plan',

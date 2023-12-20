@@ -13,7 +13,7 @@
     --color-medium-darkest: #376e0d;
 
     /*--color-medium-alt: #8A3E73;*/
-    --color-dark: rgba(49, 18, 105, 0.82);
+    --color-dark: rgba(49, 18, 105);
     --color-muted: rgba(34, 39, 47, 0.82);
     --color-warning: #FF282A;
 
@@ -55,15 +55,13 @@ h5 { /*  Used for card titles*/
 }
 .filter-form, .filtered-content{
     background-color: var(--color-white);
+    border-color: var(--color-medium-dark);
     border-width: 2px;
     border-radius: 0.5rem;
     border-style: solid;
 }
-.filter-form{
-    border-color: var(--color-medium-dark);
-}
+
 .filtered-content{
-    border-color: var(--color-light-dark);
     margin-top:1rem;
     padding:1rem;
 }

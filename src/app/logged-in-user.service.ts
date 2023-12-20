@@ -17,7 +17,6 @@ export class LoggedInUserService {
         try{
             this.loggedInAuthUser = authService.getLoggedInAuthUser();
         }catch(e){
-            console.log("No user stored")
             this.loggedInAuthUser =null;
         }
         if(this.loggedInAuthUser!=null){
