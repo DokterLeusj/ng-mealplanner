@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid">
-
         <a class="navbar-brand" href="#">mealplan.</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,11 +10,14 @@
                 <!--        navbar content-->
                 <a
                         *ngFor="let navlink of navLinks"
-                        class="nav-link"
+                        class="nav-link px-3"
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{ exact: true }"
                         routerLink="{{ navlink.routerLink }}"
-                >{{ navlink.text }}</a
+                >
+<!--                    <img class="h-100 p-1" *ngIf="navlink.hasOwnProperty('icon')" [src]="navlink.icon.url" [alt]="navlink.icon.alt" >-->
+                    {{ navlink.text }}
+                </a
                 >
             </ul>
             <span class="navbar-text">

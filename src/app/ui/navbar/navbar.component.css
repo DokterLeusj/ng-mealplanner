@@ -8,10 +8,11 @@
 .navbar-brand{
   color: var(--color-medium-light);
   padding:inherit;
+  border-bottom: 0.2rem solid transparent;
+
 }
 .nav-link{
   padding-block: 0.45rem;
-
 }
 .active {
   font-weight: 400;
@@ -20,3 +21,4 @@
 #img-profile{
   height:3rem;
 }
+

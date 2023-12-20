@@ -28,30 +28,34 @@ export class NavbarComponent {
         },
         {
             routerLink: '/meal-planner',
-            text: 'Plan',
+            text: 'My Plan',
+            icon: {
+                url: "assets/icons/schedule.png",
+                alt: "https://www.flaticon.com/free-icons/time-and-date by fjstudio"
+            },
         }
 
     ];
 
     constructor(private loggedInUserService: LoggedInUserService) {
-         loggedInUserService.getLoggedInUser();
+        loggedInUserService.getLoggedInUser();
     }
 
     logOut(): void {
         this.loggedInUserService.logOut();
     }
 
-    isLoggedIn():boolean{
+    isLoggedIn(): boolean {
         return this.loggedInUserService.isLoggedIn();
     }
-    getUsername():string|null{
-        const loggedInUser=this.loggedInUserService.getLoggedInUser();
-        if(loggedInUser!=null){
+
+    getUsername(): string | null {
+        const loggedInUser = this.loggedInUserService.getLoggedInUser();
+        if (loggedInUser != null) {
             return loggedInUser.username;
         }
         return null;
     }
-
 
 
 }
