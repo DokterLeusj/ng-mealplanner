@@ -1,0 +1,26 @@
+    <button type="button" class="btn btn-important mb-1 mx-1" (click)="updateSendFilter()">Generate !</button>
+<div class="filter-form pt-1 p-2 mb-1" [ngClass]="isShowFilter?'':'d-none'">
+    <form [formGroup]="planFilterForm">
+        <div class="row d-flex justify-content-between">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+                 *ngFor="let field of filterFields">
+                <div>
+                    <label [for]="field.controlKey">{{field.label}}</label>
+                </div>
+                <div *ngIf="field.controlType=='text'">
+                    <input class="search-field" [id]="field.controlKey" type="text" placeholder="Search ..."
+                           [formControlName]="field.controlKey">
+                </div>
+                <div *ngIf="field.controlType=='field'">
+                    <ng-multiselect-dropdown
+                            [id]="field.controlKey"
+                            [formControlName]="field.controlKey"
+                            placeholder="Search ..."
+                            [settings]="dropdownSettings"
+                            [data]="field.options"
+                    ></ng-multiselect-dropdown>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

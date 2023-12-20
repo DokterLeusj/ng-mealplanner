@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container-fluid">
-
         <a class="navbar-brand" href="#">mealplan.</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,28 +8,30 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!--        navbar content-->
-                <a
-                        *ngFor="let navlink of navLinks"
-                        class="nav-link"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                        routerLink="{{ navlink.routerLink }}"
-                >{{ navlink.text }}</a
+                <a *ngFor="let navlink of navLinks"
+                   class="nav-link px-3"
+                   routerLinkActive="active"
+                   [routerLinkActiveOptions]="{ exact: true }"
+                   routerLink="{{ navlink.routerLink }}"
                 >
+                    {{ navlink.text }}
+                </a>
             </ul>
-            <span class="navbar-text">
-        <div *ngIf="isLoggedIn()">
-            {{getUsername()}}
-            <button class="btn btn-default" (click)="logOut()" type="button">
-             Log out
-         </button>
-        </div>
-
-        <div *ngIf="!isLoggedIn()">
-      <a class="navbar-brand" routerLink="/login">Sign in</a>
-    </div>
-                <!--        <img id="img-profile" src="https://placehold.co/600x200.png?text=Sorry!+No+image+yet&font=lato" alt="">-->
-      </span>
+            <div class="navbar-profile position-relative ">
+                <div *ngIf="isLoggedIn()" >
+                    <div class="dropdown-toggle" id="profileButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{getUsername()}}
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end  navbar-dropdown" aria-labelledby="profileButton">
+                        <li class="px-2">
+                            <div class="dropdown-item navbar-dropdown" (click)="logOut()"> Log out</div>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="!isLoggedIn()">
+                    <a class="navbar-brand" routerLink="/">Sign in</a>
+                </div>
+            </div>
         </div>
     </div>
 

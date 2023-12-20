@@ -19,6 +19,7 @@ border-bottom-right-radius: 0;
 }
 .card{
   border-color:var(--color-medium-light);
+  box-shadow: 2px 2px var(--color-base);
 }
 .card-footer{
   background-color: var(--color-base);

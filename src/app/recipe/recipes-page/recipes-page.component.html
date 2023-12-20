@@ -4,12 +4,18 @@
             <div class="col-12">
                 <h1>Recipes</h1>
                 <!--                Filter-->
-                <button class="btn btn-toggle mb-1" (click)="toggleDisplayFilter()">
+                <button class="btn  btn-default mb-1" (click)="toggleDisplayFilter()">
                     {{isShowFilter ? "Close filter" : "Show filter"}}
                     <i class="fa-solid small" [ngClass]="isShowFilter?'fa-caret-up':'fa-caret-down'"></i></button>
                 <app-recipe-filter [isShowFilter]="isShowFilter"
                                    (filterEvent)="filterRecipes($event)"></app-recipe-filter>
                 <!--Recipe cards-->
+                <div class="filtered-content">
+
+                <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
+                    <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>
+                </div>
+                <!--No recipes found-->
                 <div class="row" *ngIf="displayedRecipes.length==0">
                     <app-spinner *ngIf="!isFiltered" titleText="Looking For Recipes"
                                  [subText]="['Many recipes to search in ...']"></app-spinner>
@@ -18,10 +24,6 @@
                         <app-no-matches-found name="recipes"></app-no-matches-found>
                     </div>
                 </div>
-
-                <!--        If recipes found after search-->
-                <div class="row row-cols-1 p-2 row-cols-sm-2 row-cols-md-3 g-4">
-                    <app-recipe-card *ngFor="let recipe of displayedRecipes" [recipe]="recipe"></app-recipe-card>
                 </div>
             </div>
         </div>

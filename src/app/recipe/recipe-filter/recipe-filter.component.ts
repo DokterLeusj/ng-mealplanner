@@ -2,11 +2,13 @@ import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angula
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {RecipeFilterField} from "../model/recipe-filter-field";
+import {FilterField} from "../../util/model/filter-field";
 import {RecipeService} from "../../recipe.service";
 import {RecipesFilter} from "../model/recipes-filter";
 import {UserService} from "../../user.service";
-import {DropdownOption} from "../../ui/model/dropdown-option";
+import {DropdownOption} from "../../util/model/dropdown-option";
+import {DropdownUtility} from "../../util/dropdown-utility";
+import {map, Observable} from "rxjs";
 
 
 @Component({
@@ -25,18 +27,7 @@ export class RecipeFilterComponent {
     @Input()
     isShowFilter!: boolean;
 
-
-    dropdownSettings = { //IDropdownSettings
-        singleSelection: false,
-        idField: 'id',
-        textField: 'name',
-        selectAllText: 'Select All',
-        unSelectAllText: 'Unselect All',
-        disabled: false,
-        itemsShowLimit: undefined,
-        allowSearchFilter: true,
-        searchPlaceholderText: "Search ..."
-    };
+    dropdownSettings = DropdownUtility.getDropdownSettings();
     recipeFilterForm: FormGroup = new FormGroup({
         recipeNameControl: new FormControl(""),
         authorControl: new FormControl([]),
@@ -44,72 +35,68 @@ export class RecipeFilterComponent {
         dietaryNeed: new FormControl([]),
     });
 
-    dropdownsInfo: RecipeFilterField[] = [
-        new RecipeFilterField("recipeNameControl",
+    filterFields: FilterField[] = [
+        new FilterField("recipeNameControl",
             "Title contains: ",
-            'text'
+            'text',
+            undefined
         ),
-        new RecipeFilterField("authorControl",
+        new FilterField("authorControl",
             "Author(s)",
-            'dropdown'
+            'field',
+            undefined
         ),
-        new RecipeFilterField("excludedCategory",
+        new FilterField("excludedCategory",
             "Excluded category(s)",
-            'dropdown',
-            // this.recipeService.getAllFoodCategories
+            'field',
+            undefined
         ),
-        new RecipeFilterField("dietaryNeed",
+        new FilterField("dietaryNeed",
             "Dietary needs",
-            'dropdown'),
+            'field',
+            undefined
+        ),
     ];
     @Output()
     filterEvent = new EventEmitter<RecipesFilter>();
 
     constructor(private recipeService: RecipeService, private userService: UserService) {
-        for (let dropdown of this.dropdownsInfo) {
-            if (dropdown.controlKey == "authorControl") {
-                this.userService.getAllUsers(true).subscribe(
-                    response => {
-                               let dropdownOptions:Array<DropdownOption>=
-                                response.map(u=>new DropdownOption(u.id,u.username))
-                            dropdown.setOptions(dropdownOptions);
-                        })
-            } else if (dropdown.controlKey == "excludedCategory") {
-                this.recipeService.getAllFoodCategories().subscribe(
-                    response => {
-                        let dropdownOptions:Array<DropdownOption>=
-                            response.map(f=>new DropdownOption(f.id,f.name))
-                        dropdown.setOptions(dropdownOptions);
-                    })
-            } else if (dropdown.controlKey == "dietaryNeed") {
-                this.recipeService.getAllDiets().subscribe(response => {
-                    let dropdownOptions:Array<DropdownOption>=
-                        response.map(d=>new DropdownOption(d.id,d.name))
-                    dropdown.setOptions(dropdownOptions);
-                });
-            }
+            this.populateDropdownOptions("authorControl", this.userService.getAllUsers(true), u => new DropdownOption(u.id, u.username));
+            this.populateDropdownOptions("excludedCategory", this.recipeService.getAllFoodCategories(), f => new DropdownOption(f.id, f.name));
+            this.populateDropdownOptions("dietaryNeed", this.recipeService.getAllDiets(), d => new DropdownOption(d.id, d.name));
+    }
+
+    private populateDropdownOptions(
+        controlKey: string,
+        observable: Observable<any>,
+        mapFunction: (item: any) => DropdownOption
+    ): void {
+        const field = this.filterFields.find(field => field.controlKey === controlKey);
+
+        if (field) {
+            observable.subscribe(response => {
+                const dropdownOptions: Array<DropdownOption> = response.map(mapFunction);
+                field.setOptions(dropdownOptions);
+            });
         }
     }
 
-    updateSendFilter() {
+    public updateSendFilter() {
         this.sendFilter(this.getRecipeFilterToRecipeFilter());
     }
 
-    getRecipeFilterToRecipeFilter(): RecipesFilter {
+    private getRecipeFilterToRecipeFilter(): RecipesFilter {
         const formValues = this.recipeFilterForm.getRawValue();
         return {
-            nameContains: formValues.recipeNameControl,
-            authorIds: this.getFormControlArrayIds(formValues.authorControl),
-            excludedCategoryIds: this.getFormControlArrayIds(formValues.excludedCategory),
-            dietaryNeedIds: this.getFormControlArrayIds(formValues.dietaryNeed)
+            nameContains: formValues.nameContains,
+            authorIds: DropdownUtility.getFormControlArrayIds(formValues.authorControl),
+            excludedCategoryIds: DropdownUtility.getFormControlArrayIds(formValues.excludedCategory),
+            dietaryNeedIds: DropdownUtility.getFormControlArrayIds(formValues.dietaryNeed)
         };
     }
 
-    getFormControlArrayIds(objArr: any[]): number[] {
-        return objArr.map(o => o.id);
-    }
 
-    sendFilter(value: RecipesFilter
+    private sendFilter(value: RecipesFilter
     ) {
         this.filterEvent.emit(value);
     }

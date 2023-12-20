@@ -4,6 +4,7 @@ import {RecipesFilter} from "./recipe/model/recipes-filter";
 import {Observable} from "rxjs";
 import {RecipeListDto} from "./recipe/model/dto/recipe-list-dto";
 import {UserListDto} from './user/model/dto/user-list-dto';
+import {UserPlanDto} from "./user/model/dto/user-plan-dto";
 
 @Injectable({
     providedIn: 'root'
@@ -26,11 +27,17 @@ export class UserService {
         )
     }
 
-    getUserDetailById(id: number | string): Observable<UserListDto> {
+    getUserListById(id: number | string): Observable<UserListDto> {
         if(id=="") {
             throw new Error("Invalid id. Id can not be empty.")
         }
         return this.httpClient.get<UserListDto>(`${this.USER_URL}/${id}`)
+    }
+    getUserPlanSettingsById(id: number | string): Observable<UserPlanDto> {
+        if(id=="") {
+            throw new Error("Invalid id. Id can not be empty.")
+        }
+        return this.httpClient.get<UserPlanDto>(`${this.USER_URL}/${id}/settings/plan`)
     }
 
 }

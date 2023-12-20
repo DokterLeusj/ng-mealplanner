@@ -28,8 +28,8 @@ export class RegisterOrLoginComponent {
     isButtonActionClicked: boolean = false;
     isActionSuccessful: boolean = false;
     credentialsForm = new FormGroup({
-        userRegisterEmail: new FormControl("someone@someone.com", [Validators.email, Validators.required]),
-        userRegisterPassword: new FormControl("Someone1", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
+        userRegisterEmail: new FormControl("", [Validators.email, Validators.required]),
+        userRegisterPassword: new FormControl("", [Validators.required, Validators.pattern(/^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/)])
     });
 
     constructor(private authService: AuthService, private router: Router, private loggedInUserService: LoggedInUserService) {

@@ -13,17 +13,17 @@
     --color-medium-darkest: #376e0d;
 
     /*--color-medium-alt: #8A3E73;*/
-    --color-dark: #311269;
+    --color-dark: rgba(49, 18, 105);
     --color-muted: rgba(34, 39, 47, 0.82);
     --color-warning: #FF282A;
 
 }
 
 body {
+    background-color: var(--color-light-light);
     font-family: 'Lexend', sans-serif;
     font-weight: 300;
     font-size: 0.9rem;
-    background-color: var(--color-white);
     color: var(--color-black);
 }
 
@@ -31,10 +31,13 @@ h1 { /*Use for page titles only*/
     font-weight: 100;
     font-size: xx-large;
     color: var(--color-medium-dark);
+    padding-top: 0.8rem;
+    padding-bottom: 0.3rem;
 }
 
 h2 { /*Use for in page titles only*/
     font-weight: 300;
+    padding-bottom: 0.5rem;
 }
 
 h5 { /*  Used for card titles*/
@@ -50,8 +53,18 @@ h5 { /*  Used for card titles*/
     font-weight: 400;
     font-size: small;
 }
+.filter-form, .filtered-content{
+    background-color: var(--color-white);
+    border-color: var(--color-medium-dark);
+    border-width: 2px;
+    border-radius: 0.5rem;
+    border-style: solid;
+}
 
-
+.filtered-content{
+    margin-top:1rem;
+    padding:1rem;
+}
 .btn {
     --bs-btn-font-size: 1rem;
     --bs-btn-font-weight: 300;
@@ -61,6 +74,7 @@ h5 { /*  Used for card titles*/
     --bs-btn-border-color: transparent;
     --bs-btn-hover-border-color: transparent;
     border-radius: 1rem;
+    width: 8rem;
 }
 
 .btn-default {
@@ -68,6 +82,12 @@ h5 { /*  Used for card titles*/
     --bs-btn-hover-color: var(--bs-btn-color);
     --bs-btn-bg: var(--color-medium-dark);
     --bs-btn-hover-bg: var(--color-medium-light);
+}
+.btn-important {
+    --bs-btn-color: var(--color-white);
+    --bs-btn-hover-color: var(--bs-btn-color);
+    --bs-btn-bg: var(--color-light-dark);
+    --bs-btn-hover-bg: var(--color-light);
 }
 
 .btn-disabled {
@@ -79,15 +99,7 @@ h5 { /*  Used for card titles*/
     --bs-btn-hover-border-color: var(--bs-btn-color);
 }
 
-.btn-toggle {
-    --bs-btn-color: var(--color-dark);
-    --bs-btn-hover-color: var(--bs-btn-color);
-    --bs-btn-bg: var(--color-bright);
-    --bs-btn-hover-bg: var(--color-bright-light);
-    --bs-btn-border-color: transparent;
-    --bs-btn-hover-border-color: var(--bs-btn-border-color);
-    border-radius: 0.5rem;
-}
+
 
 .img-container-40vh {
     max-height: 40vh;
@@ -106,7 +118,7 @@ label {
 form {
     --bg-color: var(--color-white);
     --base-color: var(--color-medium-darkest);
-    --border-color: var(--color-light-light);
+    --border-color: var(--color-medium-dark);
 
     text-align: left;
     vertical-align: middle;
@@ -116,7 +128,7 @@ form {
         background-color: var(--bg-color);
         display: inline-block;
         width: 100%;
-        border: 1px transparent !important;
+        border: 1px solid var(--border-color) !important;
         padding: 6px 12px;
         margin-bottom: 0;
         line-height: 1.52857143;
@@ -125,7 +137,7 @@ form {
     }
 
     .multiselect-dropdown .dropdown-btn .selected-item {
-        border: transparent !important;
+        border: var(--border-color) !important;
         border-radius: 2px !important;
         margin-right: 4px;
         margin-bottom: 2px;

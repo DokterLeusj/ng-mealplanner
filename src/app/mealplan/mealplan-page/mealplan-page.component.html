@@ -1,16 +1,39 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1>My Meal Planner</h1>
-      <h2>My preferences</h2>
+<div class="container" *ngIf="isLoggedIn()">
+    <div class="row">
+        <div class="col-12">
+            <h1>My Meal Planner</h1>
+            <div class="py-2">
+                <!--Filter-->
+                <button class="btn btn-default mb-1 " (click)="toggleDisplayFilter()">
+                    {{isShowFilter ? "Close filter" : "Show filter"}}
+                    <i class="fa-solid small" [ngClass]="isShowFilter?'fa-caret-up':'fa-caret-down'"></i></button>
 
-      <div>
-        <button class="btn btn-default">
-        Generate !
-        </button>
-      </div>
-      <h2>My Meal Plan</h2>
+                <app-plan-filter [isShowFilter]="isShowFilter"
+                                 (filterEvent)="generateMealPlan($event)"></app-plan-filter>
+            </div>
+            <div class="filtered-content">
+                <h2>My Meal Plan</h2>
+                <!--            Meal cards-->
+                <div class="row row-cols-1 g-4">
+                    <app-plan-day-card *ngFor="let day of planDays" [planDay]="day"></app-plan-day-card>
+                </div>
+
+                <!--No recipes found-->
+                <div class="row" *ngIf="mealPlanDraft==null">
+                    <app-spinner *ngIf="!isPlanGenerated" titleText="Generating Meal Plan"
+                                 [subText]="['Creating a good fit ...']"></app-spinner>
+
+                    <div class="row" *ngIf="isPlanGenerated">
+                        <app-no-matches-found name="Meal Plan"></app-no-matches-found>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
-  </div>
+</div>
+<div *ngIf="!isLoggedIn()">
+    <app-no-access [subTextArr]="['Please log in to generate a Meal Plan.']"></app-no-access>
 </div>
 

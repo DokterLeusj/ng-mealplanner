@@ -1,3 +1,7 @@
+.navbar, .navbar-dropdown{
+  color:var(--color-white);
+    background-color: var(--color-dark);
+}
 .navbar{
   color:var(--color-white);
   padding-top: 0.1rem;
@@ -8,10 +12,12 @@
 .navbar-brand{
   color: var(--color-medium-light);
   padding:inherit;
+  border-bottom: 0.2rem solid transparent;
+
 }
+
 .nav-link{
   padding-block: 0.45rem;
-
 }
 .active {
   font-weight: 400;
@@ -19,4 +25,7 @@
 }
 #img-profile{
   height:3rem;
+}
+.navbar-profile{
+  width: fit-content;
 }

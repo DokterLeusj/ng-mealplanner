@@ -5,7 +5,7 @@ import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {RecipeService} from "../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
 import {RecipesFilter} from "../model/recipes-filter";
-import {RecipeFilterField} from "../model/recipe-filter-field";
+import {FilterField} from "../../util/model/filter-field";
 import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-found.component";
 import {SpinnerComponent} from "../../ui/spinner/spinner.component";
 
