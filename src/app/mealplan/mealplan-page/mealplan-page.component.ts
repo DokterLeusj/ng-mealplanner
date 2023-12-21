@@ -52,8 +52,9 @@ export class MealplanPageComponent {
   }
 
   generateMealPlan(filter: PlanFilter) {
+    this.mealPlanDraft=null;
     this.planDays = [];
-    this.isPlanGenerated = false;
+    this.isPlanGenerated = true;
     this.updateFilter(filter);
     this.mealPlanService.getMealPlanDraft(this.filter)
       .subscribe(
@@ -65,7 +66,9 @@ export class MealplanPageComponent {
         }
       );
   }
-
+  getMealPlanDraft(){
+    return this.mealPlanDraft;
+  }
   isLoggedIn(): boolean {
     return this.loggedInUserService.isLoggedIn();
   }
