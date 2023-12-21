@@ -28,7 +28,7 @@ export class MealPlanService {
         }
         if (filter.dietaryNeeds) {
             for (const dietaryNeed of filter.dietaryNeeds) {
-                params = params.append("dietaryNeedIds", dietaryNeed.id.toString());
+                params = params.append("dietaryNeeds", dietaryNeed.id.toString());
             }
         }
         return params;
