@@ -54,6 +54,7 @@ export class RegisterOrLoginComponent {
   }
 
   runAction(email: string, password: string) {
+    this.isActionSuccessful=false;
     try {
       if (this.isRegisterNotLogin) {
         this.authService.attemptRegister(email, password);
