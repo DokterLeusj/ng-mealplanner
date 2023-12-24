@@ -33,7 +33,7 @@
               <i *ngIf="navlink.iconClass!==undefined" [ngClass]="navlink.iconClass"></i> {{ navlink.text }}
             </a>
             <ul class="dropdown-menu  navbar-dropdown" [attr.aria-labelledby]="navlink.id">
-              <li class="px-2" *ngFor="let dropdownItem of navlink.dropdown">
+              <li class="px-2 " *ngFor="let dropdownItem of navlink.dropdown">
                 <a class="dropdown-item navbar-dropdown"
                    routerLinkActive="active-link"
                    [routerLink]="dropdownItem.routerLink "

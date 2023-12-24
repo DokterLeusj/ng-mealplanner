@@ -8,7 +8,7 @@
                     </h1>
                 </div>
               <div [ngSwitch]="isLoggedIn()">
-                <h6 *ngSwitchCase=true>Welcome, {{getUsername()}}</h6>
+                <app-logged-in-dashboard *ngSwitchCase=true></app-logged-in-dashboard>
                 <app-register-or-login *ngSwitchCase=false></app-register-or-login>
               </div>
             </div>

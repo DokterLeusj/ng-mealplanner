@@ -5,6 +5,7 @@ import {NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AuthService} from "../../auth.service";
 import {LoggedInUserService} from "../../logged-in-user.service";
 import {UserListDto} from "../../user/model/dto/user-list-dto";
+import {LoggedInDashboardComponent} from "../logged-in-dashboard/logged-in-dashboard.component";
 
 @Component({
   selector: 'app-hero-section-home',
@@ -13,7 +14,8 @@ import {UserListDto} from "../../user/model/dto/user-list-dto";
     RegisterOrLoginComponent,
     NgIf,
     NgSwitch,
-    NgSwitchCase
+    NgSwitchCase,
+    LoggedInDashboardComponent
   ],
   templateUrl: './hero-section-home.component.html',
   styleUrl: './hero-section-home.component.css'
@@ -26,8 +28,6 @@ export class HeroSectionHomeComponent {
     return this.loggedInUserService.isLoggedIn();
   }
 
-  getUsername(): string |undefined{
-    return this.loggedInUserService.getLoggedInUser()?.username;
-  }
+
 
 }

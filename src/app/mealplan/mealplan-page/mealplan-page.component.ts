@@ -4,7 +4,7 @@ import {RecipeFilterComponent} from "../../recipe/recipe-views/recipe-filter/rec
 import {RecipesFilter} from "../../recipe/model/recipes-filter";
 import {PlanFilter} from "../model/plan-filter";
 import {RecipeService} from "../../recipe.service";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {LoggedInUserService} from "../../logged-in-user.service";
 import {InfoComponent} from "../../ui/info/info.component";
 import {NoAccessComponent} from "../../ui/no-access/no-access.component";
@@ -31,7 +31,9 @@ import {PlanDayCardComponent} from "../plan-day-card/plan-day-card.component";
         NoMatchesFoundComponent,
         RecipeCardComponent,
         SpinnerComponent,
-        PlanDayCardComponent
+        PlanDayCardComponent,
+        NgSwitch,
+        NgSwitchCase
     ],
     templateUrl: './mealplan-page.component.html',
     styleUrl: './mealplan-page.component.css'
