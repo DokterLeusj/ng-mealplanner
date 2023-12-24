@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {PlanFilterComponent} from "../plan-filter/plan-filter.component";
-import {RecipeFilterComponent} from "../../recipe/recipe-filter/recipe-filter.component";
+import {RecipeFilterComponent} from "../../recipe/recipe-views/recipe-filter/recipe-filter.component";
 import {RecipesFilter} from "../../recipe/model/recipes-filter";
 import {PlanFilter} from "../model/plan-filter";
 import {RecipeService} from "../../recipe.service";
@@ -9,7 +9,7 @@ import {LoggedInUserService} from "../../logged-in-user.service";
 import {InfoComponent} from "../../ui/info/info.component";
 import {NoAccessComponent} from "../../ui/no-access/no-access.component";
 import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-found.component";
-import {RecipeCardComponent} from "../../recipe/recipe-card/recipe-card.component";
+import {RecipeCardComponent} from "../../recipe/recipe-views/recipe-card/recipe-card.component";
 import {SpinnerComponent} from "../../ui/spinner/spinner.component";
 import {RecipeListDto} from "../../recipe/model/dto/recipe-list-dto";
 import {MealPlanService} from "../../meal-plan.service";
