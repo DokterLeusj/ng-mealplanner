@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {RecipeListDto} from "../model/dto/recipe-list-dto";
+import {RecipeListDto} from "../../model/dto/recipe-list-dto";
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 

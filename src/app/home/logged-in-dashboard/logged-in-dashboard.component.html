@@ -1,0 +1,5 @@
+<h6>Welcome, {{getUsername()}}</h6>
+<div>What do you want to do today?</div>
+<ul>
+  <li class="list" *ngFor="let actionLink of getActionLinks()"> <a [routerLink]="actionLink.routerLink">{{actionLink.text}}</a></li>
+</ul>

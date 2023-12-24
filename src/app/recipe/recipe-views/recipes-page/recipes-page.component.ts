@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {RecipeCardComponent} from "../recipe-card/recipe-card.component";
-import {RecipeListDto} from "../model/dto/recipe-list-dto";
+import {RecipeListDto} from "../../model/dto/recipe-list-dto";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {RecipeService} from "../../recipe.service";
+import {RecipeService} from "../../../recipe.service";
 import {RecipeFilterComponent} from "../recipe-filter/recipe-filter.component";
-import {RecipesFilter} from "../model/recipes-filter";
-import {FilterField} from "../../util/model/filter-field";
-import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-found.component";
-import {SpinnerComponent} from "../../ui/spinner/spinner.component";
+import {RecipesFilter} from "../../model/recipes-filter";
+import {FilterField} from "../../../util/model/filter-field";
+import {NoMatchesFoundComponent} from "../../../ui/no-matches-found/no-matches-found.component";
+import {SpinnerComponent} from "../../../ui/spinner/spinner.component";
 
 @Component({
   selector: 'app-recipes-page',

@@ -6,56 +6,63 @@ import {UserListDto} from "../../user/model/dto/user-list-dto";
 import {LoggedInUserService} from "../../logged-in-user.service";
 
 @Component({
-    selector: 'app-navbar',
-    standalone: true,
-    imports: [RouterLink, RouterModule, NgForOf, CommonModule],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.css'
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [RouterLink, RouterModule, NgForOf, CommonModule],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-    navLinks: Array<any> = [
+  navLinks: Array<any> = [
+    {
+      routerLink: '',
+      text: 'Home',
+    },
+    {
+      routerLink: '/recipes',
+      text: 'Recipes',
+      id:"recipes-dropdown",
+      dropdown: [
         {
-            routerLink: '',
-            text: 'Home',
-        },
-        {
-            routerLink: '/recipes',
-            text: 'Recipes',
-        },
-        // {
-        //     routerLink: '/style',
-        //     text: 'DEV style',
-        // },
-        {
-            routerLink: '/meal-planner',
-            text: 'My Plan',
-            icon: {
-                url: "assets/icons/schedule.png",
-                alt: "https://www.flaticon.com/free-icons/time-and-date by fjstudio"
-            },
+          text: "All Recipes",
+          routerLink: '/recipes'
+        }, {
+          text: "Create Recipe",
+          routerLink: '/recipes/new'
         }
-
-    ];
-
-    constructor(private loggedInUserService: LoggedInUserService) {
-        loggedInUserService.getLoggedInUser();
+      ]
+    },
+    // {
+    //     routerLink: '/style',
+    //     text: 'DEV style',
+    // },
+    {
+      routerLink: '/meal-planner',
+      text: 'My Plan',
+      iconClass: "fa-regular fa-calendar",
     }
 
-    logOut(): void {
-        this.loggedInUserService.logOut();
-    }
+  ];
 
-    isLoggedIn(): boolean {
-        return this.loggedInUserService.isLoggedIn();
-    }
+  constructor(private loggedInUserService: LoggedInUserService) {
+    loggedInUserService.getLoggedInUser();
+  }
 
-    getUsername(): string | null {
-        const loggedInUser = this.loggedInUserService.getLoggedInUser();
-        if (loggedInUser != null) {
-            return loggedInUser.username;
-        }
-        return null;
+  logOut(): void {
+    this.loggedInUserService.logOut();
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedInUserService.isLoggedIn();
+  }
+
+  getUsername(): string | null {
+    const loggedInUser = this.loggedInUserService.getLoggedInUser();
+    if (loggedInUser != null) {
+      return loggedInUser.username;
     }
+    return null;
+  }
 
 
 }

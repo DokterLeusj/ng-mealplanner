@@ -109,12 +109,17 @@ h5 { /*  Used for card titles*/
     max-height: inherit;
     max-width: 100%;
 }
+.list{
+    padding-block: 0.2rem;
+}
 
 label {
     font-size: small;
 }
-
-
+.dropdown-item{
+    font-weight: 300;
+    font-size: 0.9rem;
+}
 form {
     --bg-color: var(--color-white);
     --base-color: var(--color-medium-darkest);
