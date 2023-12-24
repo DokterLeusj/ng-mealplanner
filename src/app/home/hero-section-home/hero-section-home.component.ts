@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {RegisterOrLoginComponent} from "../register-or-login/register-or-login.component";
 import {AppComponent} from "../../app.component";
-import {NgIf} from "@angular/common";
+import {NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {AuthService} from "../../auth.service";
 import {LoggedInUserService} from "../../logged-in-user.service";
 import {UserListDto} from "../../user/model/dto/user-list-dto";
@@ -11,7 +11,9 @@ import {UserListDto} from "../../user/model/dto/user-list-dto";
   standalone: true,
   imports: [
     RegisterOrLoginComponent,
-    NgIf
+    NgIf,
+    NgSwitch,
+    NgSwitchCase
   ],
   templateUrl: './hero-section-home.component.html',
   styleUrl: './hero-section-home.component.css'

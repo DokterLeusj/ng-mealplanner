@@ -7,8 +7,10 @@
                         Plan your meals with us.
                     </h1>
                 </div>
-                <h6 *ngIf="isLoggedIn()">Welcome, {{getUsername()}}</h6>
-                <app-register-or-login *ngIf="!isLoggedIn()"></app-register-or-login>
+              <div [ngSwitch]="isLoggedIn()">
+                <h6 *ngSwitchCase=true>Welcome, {{getUsername()}}</h6>
+                <app-register-or-login *ngSwitchCase=false></app-register-or-login>
+              </div>
             </div>
         </div>
     </div>
