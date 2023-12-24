@@ -42,6 +42,7 @@ export class RecipesPageComponent {
   filterRecipes(filter:RecipesFilter){
     this.isFiltered=false;
     this.updateFilter(filter);
+    console.log(JSON.stringify(filter))
     this.recipeService.getAllRecipesBy(filter).subscribe(response =>{
       this.displayedRecipes=response.filter(Boolean);
       this.isFiltered=true;

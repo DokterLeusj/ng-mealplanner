@@ -88,7 +88,7 @@ export class RecipeFilterComponent {
     private getRecipeFilterToRecipeFilter(): RecipesFilter {
         const formValues = this.recipeFilterForm.getRawValue();
         return {
-            nameContains: formValues.nameContains,
+            nameContains: formValues.recipeNameControl,
             authorIds: DropdownUtility.getFormControlArrayIds(formValues.authorControl),
             excludedCategoryIds: DropdownUtility.getFormControlArrayIds(formValues.excludedCategory),
             dietaryNeedIds: DropdownUtility.getFormControlArrayIds(formValues.dietaryNeed)
