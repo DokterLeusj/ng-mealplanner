@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {
   FormArray,
@@ -9,9 +9,8 @@ import {
   ReactiveFormsModule,
   Validators
 } from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {FilterField} from "../../util/model/filter-field";
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 
 @Component({
@@ -19,63 +18,38 @@ import {MatInputModule} from "@angular/material/input";
   standalone: true,
   imports: [
     NgForOf,
-    MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     NgIf,
-    NgMultiSelectDropDownModule,
-    MatInputModule
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './recipe-create.component.html',
   styleUrl: './recipe-create.component.css'
 })
-export class RecipeCreateComponent {
-  public recipeForm: FormGroup = new FormGroup<any>({});
-  public recipeControls: FilterField[] = [
-    new FilterField("recipeName",
-      "Recipe name",
-      'text',
-    ),
-    new FilterField("imgUrl",
-      "Cover image",
-      'text',
-    ),
-    new FilterField("description",
-      "Description",
-      'text',
-    ),
-    new FilterField("ingredients",
-      "Ingredients",
-      'field',
-      undefined
-    ),
-    new FilterField("instructions",
-      "Instructions",
-      'field',
-      undefined
-    ),
-  ];
+export class RecipeCreateComponent implements OnInit {
+  public recipeForm: FormGroup = this.fb.group({
+      recipeName: ['', Validators.required],
+      // imgUrl: ['', Validators.required],
+      description: ['', Validators.required],
+      ingredients: this.fb.array([]),
+      instructions: this.fb.array([])
+    }
+  );
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.recipeForm = this.fb.group({
-        recipeName: ['', Validators.required],
-        imgUrl: ['', Validators.required],
-        description: ['', Validators.required],
-        ingredients: this.fb.array([]),
-        instructions: this.fb.array([])
-      }
-    );
     this.addIngredientGroup();
     this.addInstructionControl();
 
   }
+
   private getNewInstructionGroup(step: number): FormGroup {
     return this.fb.group({
-      step:new FormControl({value:step, disabled: true}),
-      instruction: ['',Validators.required]
+      step: new FormControl({value: step, disabled: true}),
+      instruction: ['', Validators.required]
     });
   }
 
@@ -88,18 +62,21 @@ export class RecipeCreateComponent {
       });
   }
 
-  private getIngredientsArray(){
-   return this.recipeForm.get("ingredients") as FormArray;
+  private getIngredientsArray() {
+    return this.recipeForm.get("ingredients") as FormArray;
   }
-  private getInstructionsArray(){
+
+  private getInstructionsArray() {
     return this.recipeForm.get("instructions") as FormArray;
   }
+
   private addIngredientGroup(): void {
-   const initArray= this.getIngredientsArray();
-   initArray.push(this.getNewIngredientGroup());
+    const initArray = this.getIngredientsArray();
+    initArray.push(this.getNewIngredientGroup());
   }
+
   private addInstructionControl(): void {
-    const initArray= this.getInstructionsArray();
+    const initArray = this.getInstructionsArray();
     initArray.push(this.getNewInstructionGroup(initArray.length));
   }
 

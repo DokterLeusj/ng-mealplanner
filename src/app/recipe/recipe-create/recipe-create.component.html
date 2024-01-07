@@ -3,29 +3,21 @@
     <div class="col-12">
       <h1>Create a recipe</h1>
       <form [formGroup]="recipeForm" (ngSubmit)="submitRecipe()">
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
-             *ngFor="let control of recipeControls">
-
-          <label [for]="control.controlKey">{{control.label}}</label>
-          <mat-form-field [formControlName]="control.controlKey" >
-            <mat-label >{{control.label}}</mat-label>
-            <input matInput [id]="control.controlKey" placeholder="Search ..." [formControlName]="control.controlKey">
+        <div>
+          <mat-form-field>
+            <mat-label>Recipe name</mat-label>
+            <input matInput formControlName="recipeName" id="recipeName" placeholder="Enter a value." value="">
           </mat-form-field>
-
-          <h2>Image</h2>
-          <h2>Description</h2>
-
-          <h2>Ingredients</h2>
-          <ul>
-            qty unit ingredientname
-          </ul>
-
-          <h2>Instructions</h2>
-          <ol>
-            <li class="list"> dynamic list</li>
-          </ol>
         </div>
+
+        <label for="description">Description</label>
+        <div>
+          <mat-form-field >
+            <mat-label>Recipe description</mat-label>
+            <textarea matInput formControlName="description" id="description" placeholder="Enter a value."></textarea>
+          </mat-form-field>
+        </div>
+
       </form>
     </div>
 
