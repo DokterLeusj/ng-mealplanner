@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-recipe-create',
   standalone: true,
-  imports: [],
+    imports: [
+        NgForOf
+    ],
   templateUrl: './recipe-create.component.html',
   styleUrl: './recipe-create.component.css'
 })
