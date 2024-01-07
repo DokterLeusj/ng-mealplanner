@@ -1,24 +1,63 @@
 import {Component} from '@angular/core';
-import {NgForOf} from "@angular/common";
-import {FormArray, FormBuilder, FormControl, FormGroup, FormRecord, Validators} from "@angular/forms";
-import {RecipeIngredientDto} from "../model/dto/recipe-ingredient-dto";
-import {RecipeInstructionDto} from "../model/dto/recipe-instruction-dto";
+import {NgForOf, NgIf} from "@angular/common";
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {FilterField} from "../../util/model/filter-field";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import {MatInputModule} from "@angular/material/input";
 
 @Component({
   selector: 'app-recipe-create',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+    NgMultiSelectDropDownModule,
+    MatInputModule
   ],
   templateUrl: './recipe-create.component.html',
   styleUrl: './recipe-create.component.css'
 })
 export class RecipeCreateComponent {
   public recipeForm: FormGroup = new FormGroup<any>({});
+  public recipeControls: FilterField[] = [
+    new FilterField("recipeName",
+      "Recipe name",
+      'text',
+    ),
+    new FilterField("imgUrl",
+      "Cover image",
+      'text',
+    ),
+    new FilterField("description",
+      "Description",
+      'text',
+    ),
+    new FilterField("ingredients",
+      "Ingredients",
+      'field',
+      undefined
+    ),
+    new FilterField("instructions",
+      "Instructions",
+      'field',
+      undefined
+    ),
+  ];
 
   constructor(private fb: FormBuilder) {
   }
-
 
   ngOnInit() {
     this.recipeForm = this.fb.group({
@@ -43,7 +82,7 @@ export class RecipeCreateComponent {
   private getNewIngredientGroup(): FormGroup {
     return new FormGroup(
       {
-        qty: new FormControl(),
+        qty: new FormControl(1),
         unit: new FormControl(),
         ingredient: new FormControl()
       });
@@ -65,4 +104,7 @@ export class RecipeCreateComponent {
   }
 
 
+  submitRecipe() {
+
+  }
 }

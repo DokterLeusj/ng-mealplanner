@@ -2,18 +2,31 @@
   <div class="row">
     <div class="col-12">
       <h1>Create a recipe</h1>
-      <h2>Image</h2>
-      <h2>Description</h2>
+      <form [formGroup]="recipeForm" (ngSubmit)="submitRecipe()">
 
-      <h2>Ingredients</h2>
-      <ul>
-        qty unit ingredientname
-      </ul>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+             *ngFor="let control of recipeControls">
 
-      <h2>Instructions</h2>
-      <ol>
-          <li class="list"> dynamic list</li>
-      </ol>
+          <label [for]="control.controlKey">{{control.label}}</label>
+          <mat-form-field [formControlName]="control.controlKey" >
+            <mat-label >{{control.label}}</mat-label>
+            <input matInput [id]="control.controlKey" placeholder="Search ..." [formControlName]="control.controlKey">
+          </mat-form-field>
+
+          <h2>Image</h2>
+          <h2>Description</h2>
+
+          <h2>Ingredients</h2>
+          <ul>
+            qty unit ingredientname
+          </ul>
+
+          <h2>Instructions</h2>
+          <ol>
+            <li class="list"> dynamic list</li>
+          </ol>
+        </div>
+      </form>
     </div>
 
   </div>
