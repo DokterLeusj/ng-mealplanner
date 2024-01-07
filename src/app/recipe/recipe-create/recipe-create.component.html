@@ -10,14 +10,57 @@
           </mat-form-field>
         </div>
 
-        <label for="description">Description</label>
         <div>
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Recipe description</mat-label>
             <textarea matInput formControlName="description" id="description" placeholder="Enter a value."></textarea>
           </mat-form-field>
         </div>
 
+        <div formArrayName="ingredients">
+          <div *ngFor="let ingredient of getIngredientsFormArray().controls; let i=index">
+            <div [formGroupName]="i">
+              <mat-form-field>
+                <mat-label>Quantity</mat-label>
+                <input type="number"  matInput formControlName="qty" id="qty" placeholder="Search..." value="">
+
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Unit</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit.viewValue}}</mat-option>
+                </mat-select>
+                <input matInput formControlName="unit" id="unit" placeholder="Search..." value="">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Ingredient</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit.viewValue}}</mat-option>
+                </mat-select>
+                <input matInput formControlName="ingredient" id="ingredient" placeholder="Search..." value="">
+              </mat-form-field>
+
+            </div>
+            <!--              <button type="button" (click)="removeIngredient(i)">Remove Ingredient</button>-->
+          </div>
+          <!--          <button type="button" (click)="addIngredient()">Add Ingredient</button>-->
+        </div>
+
+        <!--        <div formArrayName="instructions">-->
+        <!--          <div *ngFor="let instructionControl of recipeForm.get('instructions').controls; let i = index">-->
+        <!--            <div>-->
+        <!--              <label for="instruction">Step {{ i + 1 }}:</label>-->
+        <!--              <textarea id="instruction" formControlName="{{i}}"></textarea>-->
+
+        <!--              &lt;!&ndash; Add other controls for instructions as needed &ndash;&gt;-->
+
+        <!--              <button type="button" (click)="removeInstruction(i)">Remove Step</button>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          <button type="button" (click)="addInstruction()">Add Step</button>-->
+        <!--        </div>-->
+
+        <button type="submit">Submit</button>
       </form>
     </div>
 

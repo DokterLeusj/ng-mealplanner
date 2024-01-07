@@ -12,6 +12,7 @@ import {
 import {FilterField} from "../../util/model/filter-field";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 @Component({
   selector: 'app-recipe-create',
@@ -23,27 +24,38 @@ import {MatInputModule} from "@angular/material/input";
     NgIf,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
   ],
   templateUrl: './recipe-create.component.html',
   styleUrl: './recipe-create.component.css'
 })
 export class RecipeCreateComponent implements OnInit {
-  public recipeForm: FormGroup = this.fb.group({
-      recipeName: ['', Validators.required],
-      // imgUrl: ['', Validators.required],
-      description: ['', Validators.required],
-      ingredients: this.fb.array([]),
-      instructions: this.fb.array([])
-    }
-  );
+  public recipeForm!: FormGroup;
+  public units!:Array<any>;
+  public ingredients!:Array<any>;
 
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    this.addIngredientGroup();
-    this.addInstructionControl();
-
+    this.recipeForm= this.fb.group({
+        recipeName: ['', Validators.required],
+        // imgUrl: ['', Validators.required],
+        description: ['', Validators.required],
+        ingredients: this.fb.array([this.getNewIngredientGroup(0)]),
+        instructions: this.fb.array([this.getNewInstructionGroup(0)])
+      }
+    );
+    this.units=[
+      {value:"kg",viewValue:"kg"},
+      {value:"tbs",viewValue:"tbs"},
+      {value:"piece",viewValue:"piece"},
+    ];
+    this.ingredients=[
+      {value:"1",viewValue:"carrot"},
+      {value:"2",viewValue:"potato"},
+      {value:"3",viewValue:"tofu"},
+    ];
   }
 
   private getNewInstructionGroup(step: number): FormGroup {
@@ -53,30 +65,31 @@ export class RecipeCreateComponent implements OnInit {
     });
   }
 
-  private getNewIngredientGroup(): FormGroup {
+  private getNewIngredientGroup(id:number): FormGroup {
     return new FormGroup(
       {
+        id:new FormControl({value:id,disabled:true}),
         qty: new FormControl(1),
         unit: new FormControl(),
         ingredient: new FormControl()
       });
   }
 
-  private getIngredientsArray() {
+  public getIngredientsFormArray() {
     return this.recipeForm.get("ingredients") as FormArray;
   }
 
-  private getInstructionsArray() {
+  private getInstructionsFormArray() {
     return this.recipeForm.get("instructions") as FormArray;
   }
 
   private addIngredientGroup(): void {
-    const initArray = this.getIngredientsArray();
-    initArray.push(this.getNewIngredientGroup());
+    const initArray = this.getIngredientsFormArray();
+    initArray.push(this.getNewIngredientGroup(initArray.length));
   }
 
   private addInstructionControl(): void {
-    const initArray = this.getInstructionsArray();
+    const initArray = this.getInstructionsFormArray();
     initArray.push(this.getNewInstructionGroup(initArray.length));
   }
 
@@ -84,4 +97,6 @@ export class RecipeCreateComponent implements OnInit {
   submitRecipe() {
 
   }
+
+  protected readonly JSON = JSON;
 }
