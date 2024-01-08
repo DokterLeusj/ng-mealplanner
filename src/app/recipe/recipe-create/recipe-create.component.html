@@ -22,7 +22,7 @@
             <div [formGroupName]="i">
               <mat-form-field>
                 <mat-label>Quantity</mat-label>
-                <input type="number"  matInput formControlName="qty" id="qty" placeholder="Search..." value="">
+                <input type="number" matInput formControlName="qty" id="qty" placeholder="Search..." value="">
 
               </mat-form-field>
               <mat-form-field>
@@ -39,11 +39,12 @@
                 </mat-select>
                 <input matInput formControlName="ingredient" id="ingredient" placeholder="Search..." value="">
               </mat-form-field>
+              <button *ngIf="getIngredientsFormArray().getRawValue().length>1" type="button" class="btn btn-default" (click)="removeIngredientGroup(i)">
+                Remove</button>
 
             </div>
-            <!--              <button type="button" (click)="removeIngredient(i)">Remove Ingredient</button>-->
           </div>
-          <!--          <button type="button" (click)="addIngredient()">Add Ingredient</button>-->
+          <button class="btn btn-default" type="button" (click)="addIngredientGroup()">Add another</button>
         </div>
 
         <!--        <div formArrayName="instructions">-->

@@ -83,12 +83,16 @@ export class RecipeCreateComponent implements OnInit {
     return this.recipeForm.get("instructions") as FormArray;
   }
 
-  private addIngredientGroup(): void {
+  public addIngredientGroup(): void {
     const initArray = this.getIngredientsFormArray();
     initArray.push(this.getNewIngredientGroup(initArray.length));
   }
+  public removeIngredientGroup(index:number): void {
+    const initArray = this.getIngredientsFormArray();
+    initArray.removeAt(index);
+  }
 
-  private addInstructionControl(): void {
+  public addInstructionControl(): void {
     const initArray = this.getInstructionsFormArray();
     initArray.push(this.getNewInstructionGroup(initArray.length));
   }
