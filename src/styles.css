@@ -1,3 +1,4 @@
+
 :root {
     /* Colors */
     --color-white: white;
@@ -20,6 +21,7 @@
 }
 
 body {
+  margin: 0;
     background-color: var(--color-light-light);
     font-family: 'Lexend', sans-serif;
     font-weight: 300;
@@ -109,12 +111,17 @@ h5 { /*  Used for card titles*/
     max-height: inherit;
     max-width: 100%;
 }
+.list{
+    padding-block: 0.2rem;
+}
 
 label {
     font-size: small;
 }
-
-
+.dropdown-item{
+    font-weight: 300;
+    font-size: 0.9rem;
+}
 form {
     --bg-color: var(--color-white);
     --base-color: var(--color-medium-darkest);
@@ -179,3 +186,5 @@ form {
 }
 
 
+
+html, body { height: 100%; }

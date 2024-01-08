@@ -7,22 +7,24 @@
         <a href="#" [title]="'Go to '+recipe.author.username+' profile page.'">
           {{ recipe.author.username }}
         </a></div>
-      <!--      IMG GOES HERE-->
-      <div class="col-12 img-container-40vh ">
+      <div class="col-12 img-container-40vh">
         <img [src]="recipe.imgUrl" class="img-inheriting-height" alt=""/>
       </div>
 
       <h2>Ingredients</h2>
       <ul>
-        <div *ngFor="let ingredient of recipe.ingredients">
-          <li>{{ ingredient.qty }} {{ ingredient.foodUnit.name }} {{ ingredient.ingredient.name }}</li>
+        <div *ngFor="let ingredient of recipe.ingredients" class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              {{ ingredient.qty }} {{ ingredient.foodUnit.name }} {{ ingredient.ingredient.name }}
+            </label>
         </div>
       </ul>
 
       <h2>Instructions</h2>
       <ol>
         <div *ngFor="let instruction of recipe.instructions">
-          <li> {{ instruction.instruction }}</li>
+          <li class="list"> {{ instruction.instruction }}</li>
         </div>
       </ol>
     </div>

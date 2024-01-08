@@ -1,18 +1,18 @@
 import {Component} from '@angular/core';
 import {PlanFilterComponent} from "../plan-filter/plan-filter.component";
-import {RecipeFilterComponent} from "../../recipe/recipe-filter/recipe-filter.component";
 import {PlanFilter} from "../model/plan-filter";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {LoggedInUserService} from "../../logged-in-user.service";
 import {InfoComponent} from "../../ui/info/info.component";
 import {NoAccessComponent} from "../../ui/no-access/no-access.component";
 import {NoMatchesFoundComponent} from "../../ui/no-matches-found/no-matches-found.component";
-import {RecipeCardComponent} from "../../recipe/recipe-card/recipe-card.component";
 import {SpinnerComponent} from "../../ui/spinner/spinner.component";
 import {MealPlanService} from "../../meal-plan.service";
 import {MealPlanDraftDto} from "../model/dto/meal-plan-draft-dto";
 import {MealPlanDayDto} from "../model/dto/meal-plan-day-dto";
 import {PlanDayCardComponent} from "../plan-day-card/plan-day-card.component";
+import {RecipeFilterComponent} from "../../recipe/recipe-views/recipe-filter/recipe-filter.component";
+import {RecipeCardComponent} from "../../recipe/recipe-views/recipe-card/recipe-card.component";
 
 @Component({
   selector: 'app-mealplan-page',
@@ -28,7 +28,9 @@ import {PlanDayCardComponent} from "../plan-day-card/plan-day-card.component";
     NoMatchesFoundComponent,
     RecipeCardComponent,
     SpinnerComponent,
-    PlanDayCardComponent
+    PlanDayCardComponent,
+    NgSwitch,
+    NgSwitchCase
   ],
   templateUrl: './mealplan-page.component.html',
   styleUrl: './mealplan-page.component.css'
