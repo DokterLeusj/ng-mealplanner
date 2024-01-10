@@ -19,7 +19,7 @@
 .nav-link{
   padding-block: 0.45rem;
 }
-.active {
+.active-link {
   font-weight: 400;
   border-bottom: 0.2rem solid var(--color-white);
 }

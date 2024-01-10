@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {MealPlanDayDto} from "../model/dto/meal-plan-day-dto";
 import {RecipeListDto} from "../../recipe/model/dto/recipe-list-dto";
-import {RecipeCardComponent} from "../../recipe/recipe-card/recipe-card.component";
+import {RecipeCardComponent} from "../../recipe/recipe-views/recipe-card/recipe-card.component";
 import {NgForOf} from "@angular/common";
 
 @Component({

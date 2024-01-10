@@ -2,12 +2,12 @@ import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angula
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
-import {FilterField} from "../../util/model/filter-field";
-import {RecipeService} from "../../recipe.service";
-import {RecipesFilter} from "../model/recipes-filter";
-import {UserService} from "../../user.service";
-import {DropdownOption} from "../../util/model/dropdown-option";
-import {DropdownUtility} from "../../util/dropdown-utility";
+import {FilterField} from "../../../util/model/filter-field";
+import {RecipeService} from "../../../recipe.service";
+import {RecipesFilter} from "../../model/recipes-filter";
+import {UserService} from "../../../user.service";
+import {DropdownOption} from "../../../util/model/dropdown-option";
+import {DropdownUtility} from "../../../util/dropdown-utility";
 import {map, Observable} from "rxjs";
 
 
