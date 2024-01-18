@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {
   FormArray,
   FormBuilder,
@@ -13,6 +13,7 @@ import {FilterField} from "../../util/model/filter-field";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {last} from "rxjs";
 
 @Component({
   selector: 'app-recipe-create',
@@ -25,6 +26,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    NgClass,
   ],
   templateUrl: './recipe-create.component.html',
   styleUrl: './recipe-create.component.css'
@@ -69,9 +71,9 @@ export class RecipeCreateComponent implements OnInit {
     return new FormGroup(
       {
         id:new FormControl({value:id,disabled:true}),
-        qty: new FormControl(1),
-        unit: new FormControl(),
-        ingredient: new FormControl()
+        qty: new FormControl(1,[Validators.min(1),Validators.required]),
+        unit: new FormControl('',[Validators.required]),
+        ingredient: new FormControl('',[Validators.required])
       });
   }
 
@@ -96,11 +98,12 @@ export class RecipeCreateComponent implements OnInit {
     const initArray = this.getInstructionsFormArray();
     initArray.push(this.getNewInstructionGroup(initArray.length));
   }
-
+public isOneIngredient(){
+ return this.getIngredientsFormArray().getRawValue().length==1
+}
 
   submitRecipe() {
 
   }
 
-  protected readonly JSON = JSON;
 }

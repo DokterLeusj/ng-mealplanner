@@ -2,50 +2,75 @@
   <div class="row">
     <div class="col-12">
       <h1>Create a recipe</h1>
-      <form [formGroup]="recipeForm" (ngSubmit)="submitRecipe()">
-        <div>
-          <mat-form-field>
-            <mat-label>Recipe name</mat-label>
-            <input matInput formControlName="recipeName" id="recipeName" placeholder="Enter a value." value="">
-          </mat-form-field>
-        </div>
-
-        <div>
-          <mat-form-field>
-            <mat-label>Recipe description</mat-label>
-            <textarea matInput formControlName="description" id="description" placeholder="Enter a value."></textarea>
-          </mat-form-field>
-        </div>
-
-        <div formArrayName="ingredients">
-          <div *ngFor="let ingredient of getIngredientsFormArray().controls; let i=index">
-            <div [formGroupName]="i">
-              <mat-form-field>
-                <mat-label>Quantity</mat-label>
-                <input type="number" matInput formControlName="qty" id="qty" placeholder="Search..." value="">
-
+      <form [formGroup]="recipeForm" (ngSubmit)="submitRecipe()" class="col-11">
+        <div class="row">
+          <div class="col-6">
+            <div class="row">
+              <mat-form-field class="col-8">
+                <mat-label>Recipe name</mat-label>
+                <input matInput formControlName="recipeName" id="recipeName" placeholder="Enter a value" value="">
               </mat-form-field>
-              <mat-form-field>
-                <mat-label>Unit</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit.viewValue}}</mat-option>
-                </mat-select>
-                <input matInput formControlName="unit" id="unit" placeholder="Search..." value="">
+            </div>
+
+            <div class="row">
+              <mat-form-field class="col-8">
+                <mat-label>Recipe description</mat-label>
+                <textarea matInput formControlName="description" id="description"
+                          placeholder="Enter a value"></textarea>
               </mat-form-field>
-              <mat-form-field>
-                <mat-label>Ingredient</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit.viewValue}}</mat-option>
-                </mat-select>
-                <input matInput formControlName="ingredient" id="ingredient" placeholder="Search..." value="">
-              </mat-form-field>
-              <button *ngIf="getIngredientsFormArray().getRawValue().length>1" type="button" class="btn btn-default" (click)="removeIngredientGroup(i)">
-                Remove</button>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <img class="card-img px-0" src="https://placehold.co/600x150.png?text=Sorry!+No+image+yet&font=lato"
+                   alt="">
+            </div>
+            <div class="row py-2">
+              <button class="btn btn-default " type="button">Upload image</button>
 
             </div>
           </div>
-          <button class="btn btn-default" type="button" (click)="addIngredientGroup()">Add another</button>
         </div>
+
+        <div class="row">
+          <h2>Ingredients</h2>
+          <div formArrayName="ingredients">
+            <div *ngFor="let ingredient of getIngredientsFormArray().controls; let i=index;let last=last" class="row">
+              <div [formGroupName]="i">
+                <mat-form-field class="col-2">
+                  <mat-label>Quantity</mat-label>
+                  <input type="number" matInput formControlName="qty" id="qty" placeholder="Search..." value="">
+                </mat-form-field>
+
+                <mat-form-field class="col-2">
+                  <mat-label>Unit</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit.viewValue}}</mat-option>
+                  </mat-select>
+                  <input matInput formControlName="unit" id="unit" placeholder="Search..." value="">
+                </mat-form-field>
+
+                <mat-form-field class="col-4">
+                  <mat-label>Ingredient</mat-label>
+                  <mat-select>
+                    <mat-option *ngFor="let unit of units" [value]="unit.value">{{unit.viewValue}}</mat-option>
+                  </mat-select>
+                  <input matInput formControlName="ingredient" id="ingredient" placeholder="Search..." value="">
+                </mat-form-field>
+                <button  type="button" class="btn" [ngClass]="isOneIngredient()?'btn-disabled':'btn-default'"
+                        (click)="isOneIngredient()?true:removeIngredientGroup(i)">
+                  Remove
+                </button>
+                <button *ngIf="last" class="btn btn-default" type="button" (click)="addIngredientGroup()">Add
+                  ingredient
+                </button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
 
         <!--        <div formArrayName="instructions">-->
         <!--          <div *ngFor="let instructionControl of recipeForm.get('instructions').controls; let i = index">-->
@@ -61,7 +86,7 @@
         <!--          <button type="button" (click)="addInstruction()">Add Step</button>-->
         <!--        </div>-->
 
-        <button type="submit">Submit</button>
+        <button class="btn btn-important" type="submit">Submit</button>
       </form>
     </div>
 
