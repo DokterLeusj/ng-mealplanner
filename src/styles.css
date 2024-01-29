@@ -1,3 +1,4 @@
+
 :root {
     /* Colors */
     --color-white: white;
@@ -20,6 +21,7 @@
 }
 
 body {
+  margin: 0;
     background-color: var(--color-light-light);
     font-family: 'Lexend', sans-serif;
     font-weight: 300;
@@ -184,3 +186,5 @@ form {
 }
 
 
+
+html, body { height: 100%; }
